@@ -6,8 +6,8 @@ VVP=vvp
 VVP_POST=-fst
 VIVADO=vivado -mode batch -source
 
-
-CONWAY_SRCS=hdl/conway_cell.sv hdl/adder_1.sv hdl/adder_n.sv
+ADDER_SRCS=hdl/half_adder_1.sv hdl/full_adder_1.sv hdl/full_adder_2.sv hdl/full_adder_3.sv hdl/adder_8_1_bits.sv
+CONWAY_SRCS=hdl/conway_cell.sv hdl/half_adder_1.sv hdl/full_adder_1.sv hdl/full_adder_2.sv hdl/full_adder_3.sv hdl/adder_8_1_bits.sv hdl/comparator.sv
 DECODER_SRCS=hdl/decoder*.sv
 LED_ARRAY_SRCS=${DECODER_SRCS} hdl/led_array_driver.sv
 MAIN_SRCS=${CONWAY_SRCS} ${LED_ARRAY_SRCS} hdl/main.sv 
@@ -16,9 +16,31 @@ MAIN_SRCS=${CONWAY_SRCS} ${LED_ARRAY_SRCS} hdl/main.sv
 .PHONY: clean submission remove_solutions
 
 test_decoder_1_2: tests/test_decoder_1_2.sv ${DECODER_SRCS}
+	${IVERILOG} $^ -o test_decoders.bin && ${VVP} test_decoders.bin ${VVP_POST}
+
+test_decoder_2_4: tests/test_decoder_2_4.sv ${DECODER_SRCS}
+	${IVERILOG} $^ -o test_decoders.bin && ${VVP} test_decoders.bin ${VVP_POST}
 	${IVERILOG} $^ -o test_decoder_1_2.bin && ${VVP} test_decoder_1_2.bin ${VVP_POST}
 
 test_decoders: tests/test_decoders.sv ${DECODER_SRCS}
+	${IVERILOG} $^ -o test_decoders.bin && ${VVP} test_decoders.bin ${VVP_POST}
+
+test_half_adder_1: tests/test_half_adder_1.sv ${ADDER_SRCS}
+	${IVERILOG} $^ -o test_decoders.bin && ${VVP} test_decoders.bin ${VVP_POST}
+
+test_full_adder_1: tests/test_full_adder_1.sv ${ADDER_SRCS}
+	${IVERILOG} $^ -o test_decoders.bin && ${VVP} test_decoders.bin ${VVP_POST}
+
+test_full_adder_2: tests/test_full_adder_2.sv ${ADDER_SRCS}
+	${IVERILOG} $^ -o test_decoders.bin && ${VVP} test_decoders.bin ${VVP_POST}
+
+test_full_adder_3: tests/test_full_adder_3.sv ${ADDER_SRCS}
+	${IVERILOG} $^ -o test_decoders.bin && ${VVP} test_decoders.bin ${VVP_POST}
+
+test_adder_8_1_bits: tests/test_adder_8_1_bits.sv ${ADDER_SRCS}
+	${IVERILOG} $^ -o test_decoders.bin && ${VVP} test_decoders.bin ${VVP_POST}
+
+test_comparator: tests/test_comparator.sv hdl/comparator.sv
 	${IVERILOG} $^ -o test_decoders.bin && ${VVP} test_decoders.bin ${VVP_POST}
 
 test_conway_cell: tests/test_conway_cell.sv ${CONWAY_SRCS}

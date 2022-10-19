@@ -5,7 +5,7 @@
 
 module test_led_array_driver;
 
-  parameter N = 3;
+  parameter N = 8;
 
   logic ena;
   logic [N*N-1:0] cells;
@@ -93,6 +93,7 @@ module test_led_array_driver;
         for (x = 0; x < N; x = x + 1) begin
           cells = 0;
           cells[N*j + i] = 1'b1;
+          $display("%b", x[$clog2(N)-1:0]);
           #1 $display("  %2d | 0x%h | %b | %b", x, cells, rows, cols);
           LED_ARRAY_MODEL.print_status();
         end

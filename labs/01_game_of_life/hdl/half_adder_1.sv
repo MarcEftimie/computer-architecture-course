@@ -5,10 +5,14 @@
   ripple carry adders
 */
 
-module adder_1(a, b, c_in, sum, c_out);
+module half_adder_1(a, b, sum, c_out);
 
-input wire a, b, c_in;
+input wire a, b;
 output logic sum, c_out;
 
+always_comb begin
+  sum = a ^ b; 
+  c_out = a & b;
+end
 
 endmodule
