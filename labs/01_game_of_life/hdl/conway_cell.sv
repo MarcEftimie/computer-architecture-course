@@ -29,12 +29,12 @@ comparator COMPARATOR(
     .out(state_d)
     );
 always_ff @(posedge clk ) begin //on the rising edge of the clock
-    if (rst == 1) begin //if reset on set state of the cell back to default state
+    if (rst) begin //if reset on set state of the cell back to default state
         state_q <= state_0;
     end
-    else if (ena == 1) begin //if enable is on and rst is off state of the cell is updated
+    else if (ena) begin //if enable is on and rst is off state of the cell is updated
         state_q <= state_d;
-    end
+    end 
 end
 
 endmodule

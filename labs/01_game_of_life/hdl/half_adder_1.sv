@@ -9,6 +9,7 @@ module half_adder_1(a, b, sum, c_out);
 
 input wire a, b;
 output logic sum, c_out;
+
 always_comb begin
   //xor of a and b to determine the sum, such that when both are 1 sum is 0
   sum = a ^ b; 
