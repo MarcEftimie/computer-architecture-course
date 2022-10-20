@@ -2,8 +2,8 @@
 # Vivado v2022.1 (64-bit)
 # SW Build 3526262 on Mon Apr 18 15:47:01 MDT 2022
 # IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
-# Start of session at: Wed Oct 19 19:02:00 2022
-# Process ID: 51288
+# Start of session at: Wed Oct 19 18:58:31 2022
+# Process ID: 50235
 # Current directory: /home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life
 # Command line: vivado -mode batch -source program.tcl
 # Log file: /home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/vivado.log
@@ -35,15 +35,5 @@ INFO: [Labtools 27-2221] Launch Output:
 
 
 # open_hw_target
-INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/210328B253D6A
-# set device [lindex [get_hw_devices] 0]
-# set_property PROGRAM.FILE { main.bit } [ current_hw_device ] 
-# current_hw_device $device
-# program_hw_devices $device
-INFO: [Labtools 27-3164] End of startup status: HIGH
-# refresh_hw_device [lindex [get_hw_devices] 0]
-INFO: [Labtools 27-1434] Device xc7a15t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
-# close_hw_target
-INFO: [Labtoolstcl 44-464] Closing hw_target localhost:3121/xilinx_tcf/Digilent/210328B253D6A
-# close_hw_manager
-INFO: [Common 17-206] Exiting Vivado at Wed Oct 19 19:02:12 2022...
+ERROR: [Labtoolstcl 44-469] There is no current hw_target.
+INFO: [Common 17-206] Exiting Vivado at Wed Oct 19 18:58:39 2022...

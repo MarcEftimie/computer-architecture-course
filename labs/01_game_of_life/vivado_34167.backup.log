@@ -1,0 +1,89 @@
+#-----------------------------------------------------------
+# Vivado v2022.1 (64-bit)
+# SW Build 3526262 on Mon Apr 18 15:47:01 MDT 2022
+# IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+# Start of session at: Wed Oct 19 18:53:31 2022
+# Process ID: 34167
+# Current directory: /home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life
+# Command line: vivado -mode batch -source build.tcl
+# Log file: /home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/vivado.log
+# Journal file: /home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/vivado.jou
+# Running On: rsiddique, OS: Linux, CPU Frequency: 2700.000 MHz, CPU Physical cores: 6, Host memory: 16361 MB
+#-----------------------------------------------------------
+source build.tcl
+# read_verilog [ glob ./hdl/*.sv ]
+# read_xdc ./main.xdc
+# synth_design -top main -part xc7a15tcpg236-1
+Command: synth_design -top main -part xc7a15tcpg236-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a15t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a15t'
+INFO: [Device 21-403] Loading part xc7a15tcpg236-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 34244
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 2616.367 ; gain = 0.000 ; free physical = 4784 ; free virtual = 11878
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'main' [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/main.sv:27]
+INFO: [Synth 8-6157] synthesizing module 'conway_cell' [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/conway_cell.sv:4]
+INFO: [Synth 8-6157] synthesizing module 'adder_8_1_bits' [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/adder_8_1_bits.sv:4]
+INFO: [Synth 8-6157] synthesizing module 'full_adder_1' [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/full_adder_1.sv:8]
+INFO: [Synth 8-6155] done synthesizing module 'full_adder_1' (0#1) [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/full_adder_1.sv:8]
+INFO: [Synth 8-6157] synthesizing module 'full_adder_2' [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/full_adder_2.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'half_adder_1' [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/half_adder_1.sv:8]
+INFO: [Synth 8-6155] done synthesizing module 'half_adder_1' (0#1) [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/half_adder_1.sv:8]
+INFO: [Synth 8-6155] done synthesizing module 'full_adder_2' (0#1) [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/full_adder_2.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'full_adder_3' [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/full_adder_3.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'full_adder_3' (0#1) [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/full_adder_3.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'adder_8_1_bits' (0#1) [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/adder_8_1_bits.sv:4]
+INFO: [Synth 8-6157] synthesizing module 'comparator' [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/comparator.sv:8]
+INFO: [Synth 8-6155] done synthesizing module 'comparator' (0#1) [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/comparator.sv:8]
+INFO: [Synth 8-6155] done synthesizing module 'conway_cell' (0#1) [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/conway_cell.sv:4]
+INFO: [Synth 8-6157] synthesizing module 'led_array_driver' [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/led_array_driver.sv:4]
+	Parameter N bound to: 8 - type: integer 
+	Parameter ROWS bound to: 8 - type: integer 
+	Parameter COLS bound to: 8 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'decoder_3_to_8' [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/decoder_3_to_8.sv:21]
+INFO: [Synth 8-6157] synthesizing module 'decoder_2_to_4' [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/decoder_2_to_4.sv:2]
+INFO: [Synth 8-6157] synthesizing module 'decoder_1_to_2' [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/decoder_1_to_2.sv:2]
+INFO: [Synth 8-6155] done synthesizing module 'decoder_1_to_2' (0#1) [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/decoder_1_to_2.sv:2]
+INFO: [Synth 8-6155] done synthesizing module 'decoder_2_to_4' (0#1) [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/decoder_2_to_4.sv:2]
+INFO: [Synth 8-6155] done synthesizing module 'decoder_3_to_8' (0#1) [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/decoder_3_to_8.sv:21]
+INFO: [Synth 8-6155] done synthesizing module 'led_array_driver' (0#1) [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/led_array_driver.sv:4]
+INFO: [Synth 8-6155] done synthesizing module 'main' (0#1) [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/hdl/main.sv:27]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2616.367 ; gain = 0.000 ; free physical = 5871 ; free virtual = 12970
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2616.367 ; gain = 0.000 ; free physical = 5873 ; free virtual = 12971
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2616.367 ; gain = 0.000 ; free physical = 5873 ; free virtual = 12971
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 2616.367 ; gain = 0.000 ; free physical = 5870 ; free virtual = 12968
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/main.xdc]
+Finished Parsing XDC File [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/main.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/rsiddique/Documents/olin-cafe-f22/labs/01_game_of_life/main.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/main_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/main_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2680.383 ; gain = 0.000 ; free physical = 5784 ; free virtual = 12876
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.02 . Memory (MB): peak = 2680.383 ; gain = 0.000 ; free physical = 5784 ; free virtual = 12875
+INFO: [Common 17-41] Interrupt caught. Command should exit soon.
+1
+INFO: [Common 17-83] Releasing license: Synthesis
+34 Infos, 0 Warnings, 0 Critical Warnings and 1 Errors encountered.
+synth_design failed
+INFO: [Common 17-344] 'source' was cancelled
+INFO: [Common 17-206] Exiting Vivado at Wed Oct 19 18:53:51 2022...
