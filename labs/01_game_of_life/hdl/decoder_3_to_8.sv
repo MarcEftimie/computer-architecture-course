@@ -12,7 +12,7 @@ logic [3:0] decoder_1_out;
 
 decoder_2_to_4 DECODER_0 (.ena(c_bar), .in(in[1:0]), .out(decoder_0_out));
 decoder_2_to_4 DECODER_1 (.ena(in[2]), .in(in[1:0]), .out(decoder_1_out));
-//Uses the 4 states decoded from each part of the 3 bit number to find the 8 states
+//Uses the 4 states decoded from each 2 to 4 decoder of the 3 bit number to find the 8 states
 always_comb begin
   c_bar = ~in[2];
   out[7] = decoder_1_out[3] & ena; 

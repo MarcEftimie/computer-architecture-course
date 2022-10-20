@@ -25,7 +25,7 @@ test_decoder_2_4: tests/test_decoder_2_4.sv ${DECODER_SRCS}
 test_decoder_2_4: tests/test_decoder_2_4.sv ${DECODER_SRCS}
 	${IVERILOG} $^ -o test_decoder_2_4.bin && ${VVP} test_decoder_2_4.bin ${VVP_POST}
 
-test_decoders: tests/test_decoders.sv ${DECODER_SRCS}
+test_decoder_3_8: tests/test_decoder_3_8.sv ${DECODER_SRCS}
 	${IVERILOG} $^ -o test_decoders.bin && ${VVP} test_decoders.bin ${VVP_POST}
 
 test_half_adder_1: tests/test_half_adder_1.sv ${ADDER_SRCS}

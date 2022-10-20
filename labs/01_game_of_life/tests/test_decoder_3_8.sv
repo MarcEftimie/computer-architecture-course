@@ -3,7 +3,7 @@
 
 `define SIMULATION
 
-module test_decoders;
+module test_decoder_3_8;
   logic ena;
   logic [2:0] in;
   wire [7:0] out;
