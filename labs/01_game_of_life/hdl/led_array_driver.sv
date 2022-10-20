@@ -33,6 +33,7 @@ wire [N-1:0] x_decoded;
 decoder_3_to_8 COL_DECODER(ena, x[$clog2(N)-1:0], x_decoded);
 always_comb begin
   cols = x_decoded;
+  // indexs an 8 bit array within the 64 bit array based on the row
   rows[0] = ~cells[x*ROWS];
   rows[1] = ~cells[x*ROWS + 1];
   rows[2] = ~cells[x*ROWS + 2];
