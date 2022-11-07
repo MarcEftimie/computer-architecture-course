@@ -1,0 +1,123 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.1 (lin64) Build 3526262 Mon Apr 18 15:47:01 MDT 2022
+| Date         : Mon Nov  7 00:17:31 2022
+| Host         : marc-Precision-3551 running 64-bit Ubuntu 22.04.1 LTS
+| Command      : report_timing -sort_by group -max_paths 100 -path_type summary -file timing.log -verbose
+| Design       : main
+| Device       : 7a35t-cpg236
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+----------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Startpoint                     Endpoint                       Slack(ns)     
+----------------------------------------------------------------------------
+PWM_LED0/counter_reg[0]/C      PWM_LED0/out_reg/CE            11.568        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[12]/R  11.610        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[13]/R  11.610        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[14]/R  11.610        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[15]/R  11.610        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[20]/R  11.722        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[10]/R  11.748        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[11]/R  11.748        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[8]/R   11.748        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[9]/R   11.748        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[0]/R    11.794        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[1]/R    11.794        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[2]/R    11.794        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[3]/R    11.794        
+PWM_LED1/counter_reg[1]/C      PWM_LED1/out_reg/CE            11.797        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[12]/R   11.830        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[13]/R   11.830        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[14]/R   11.830        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[15]/R   11.830        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[4]/R    11.861        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[5]/R    11.861        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[6]/R    11.861        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[7]/R    11.861        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[16]/R  11.865        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[17]/R  11.865        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[18]/R  11.865        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[19]/R  11.865        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[4]/R   11.897        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[5]/R   11.897        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[6]/R   11.897        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[7]/R   11.897        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[10]/R   11.909        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[11]/R   11.909        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[8]/R    11.909        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[9]/R    11.909        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[20]/R   11.917        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[21]/R   11.917        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[22]/R   11.917        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[23]/R   11.917        
+PULSE_100Hz/counter_reg[3]/C   LED_FADER1/out_reg[0]/CE       12.019        
+PULSE_100Hz/counter_reg[3]/C   LED_FADER1/out_reg[1]/CE       12.019        
+PULSE_100Hz/counter_reg[3]/C   LED_FADER1/out_reg[2]/CE       12.019        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[16]/R   12.058        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[17]/R   12.058        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[18]/R   12.058        
+PULSE_10Hz/counter_reg[3]/C    PULSE_10Hz/counter_reg[19]/R   12.058        
+PULSE_100Hz/counter_reg[3]/C   LED_FADER1/out_reg[3]/CE       12.068        
+PULSE_100Hz/counter_reg[3]/C   LED_FADER1/out_reg[4]/CE       12.068        
+PULSE_100Hz/counter_reg[3]/C   LED_FADER1/out_reg[5]/CE       12.068        
+PULSE_100Hz/counter_reg[3]/C   LED_FADER1/out_reg[6]/CE       12.068        
+PULSE_100Hz/counter_reg[3]/C   LED_FADER1/out_reg[7]/CE       12.068        
+PULSE_100Hz/counter_reg[3]/C   LED_FADER1/out_reg[8]/CE       12.068        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[0]/R   12.072        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[1]/R   12.072        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[2]/R   12.072        
+PULSE_100Hz/counter_reg[3]/C   PULSE_100Hz/counter_reg[3]/R   12.072        
+PULSE_10Hz/counter_reg[3]/C    LED_FADER0/out_reg[5]/CE       12.218        
+LED_FADER1/count_reg[3]/C      LED_FADER1/state_reg/D         12.246        
+PULSE_10Hz/counter_reg[3]/C    LED_FADER0/out_reg[0]/CE       12.268        
+PULSE_10Hz/counter_reg[3]/C    LED_FADER0/out_reg[1]/CE       12.268        
+PULSE_10Hz/counter_reg[3]/C    LED_FADER0/out_reg[2]/CE       12.268        
+PULSE_10Hz/counter_reg[3]/C    LED_FADER0/out_reg[3]/CE       12.268        
+PULSE_10Hz/counter_reg[3]/C    LED_FADER0/out_reg[6]/CE       12.268        
+PULSE_10Hz/counter_reg[3]/C    LED_FADER0/out_reg[4]/CE       12.407        
+PULSE_10Hz/counter_reg[3]/C    LED_FADER0/out_reg[7]/CE       12.407        
+PULSE_10Hz/counter_reg[3]/C    LED_FADER0/out_reg[8]/CE       12.407        
+PWM_LED1/counter_reg[1]/C      PWM_LED1/out_reg/D             12.626        
+PWM_LED0/counter_reg[0]/C      PWM_LED0/counter_reg[4]/R      12.663        
+ILI9341/state_reg[2]/C         ILI9341/cfg_bytes_remaining_reg[0]/CE
+                                                              12.672        
+ILI9341/state_reg[2]/C         ILI9341/cfg_bytes_remaining_reg[1]/CE
+                                                              12.672        
+ILI9341/state_reg[2]/C         ILI9341/cfg_bytes_remaining_reg[2]/CE
+                                                              12.672        
+ILI9341/state_reg[2]/C         ILI9341/cfg_bytes_remaining_reg[4]/CE
+                                                              12.672        
+ILI9341/state_reg[2]/C         ILI9341/cfg_bytes_remaining_reg[5]/CE
+                                                              12.672        
+PWM_LED0/counter_reg[0]/C      PWM_LED0/counter_reg[0]/R      12.680        
+PWM_LED0/counter_reg[0]/C      PWM_LED0/counter_reg[1]/R      12.680        
+PWM_LED0/counter_reg[0]/C      PWM_LED0/counter_reg[2]/R      12.680        
+PWM_LED0/counter_reg[0]/C      PWM_LED0/counter_reg[3]/R      12.680        
+PWM_LED0/counter_reg[0]/C      PWM_LED0/counter_reg[5]/R      12.680        
+PWM_LED0/counter_reg[0]/C      PWM_LED0/counter_reg[6]/R      12.704        
+PWM_LED0/counter_reg[0]/C      PWM_LED0/counter_reg[7]/R      12.704        
+PWM_LED0/counter_reg[0]/C      PWM_LED0/counter_reg[8]/R      12.704        
+PWM_LED1/counter_reg[1]/C      PWM_LED1/counter_reg[0]/R      12.708        
+PWM_LED1/counter_reg[1]/C      PWM_LED1/counter_reg[1]/R      12.708        
+PWM_LED1/counter_reg[1]/C      PWM_LED1/counter_reg[2]/R      12.708        
+PWM_LED1/counter_reg[1]/C      PWM_LED1/counter_reg[3]/R      12.708        
+LED_FADER0/out_reg[0]/C        PWM_LED0/out_reg/D             12.745        
+PWM_LED1/counter_reg[1]/C      PWM_LED1/counter_reg[4]/R      12.746        
+PWM_LED1/counter_reg[1]/C      PWM_LED1/counter_reg[5]/R      12.746        
+ILI9341/pixel_x_reg[3]/C       ILI9341/pixel_x_reg[3]/D       12.761        
+ILI9341/pixel_x_reg[3]/C       ILI9341/pixel_x_reg[1]/D       12.762        
+ILI9341/pixel_x_reg[3]/C       ILI9341/state_reg[0]/D         12.771        
+ILI9341/pixel_x_reg[5]/C       ILI9341/pixel_y_reg[0]/CE      12.777        
+ILI9341/pixel_x_reg[5]/C       ILI9341/pixel_y_reg[6]/CE      12.777        
+ILI9341/pixel_x_reg[5]/C       ILI9341/pixel_y_reg[7]/CE      12.777        
+ILI9341/pixel_x_reg[5]/C       ILI9341/pixel_y_reg[8]/CE      12.777        
+ILI9341/pixel_x_reg[3]/C       ILI9341/pixel_x_reg[2]/D       12.780        
+PWM_LED1/counter_reg[1]/C      PWM_LED1/counter_reg[6]/R      12.783        
+PWM_LED1/counter_reg[1]/C      PWM_LED1/counter_reg[7]/R      12.783        
+PWM_LED1/counter_reg[1]/C      PWM_LED1/counter_reg[8]/R      12.783        
+ILI9341/pixel_x_reg[5]/C       ILI9341/pixel_y_reg[1]/CE      12.804        
+
+
+
