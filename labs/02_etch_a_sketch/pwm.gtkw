@@ -1,0 +1,32 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Mon Nov  7 04:24:54 2022
+[*]
+[dumpfile] "/home/marc/olin-cafe-f22/labs/02_etch_a_sketch/pwm.fst"
+[dumpfile_mtime] "Mon Nov  7 04:24:36 2022"
+[dumpfile_size] 7013
+[savefile] "/home/marc/olin-cafe-f22/labs/02_etch_a_sketch/pwm.gtkw"
+[timestart] 9332748000
+[size] 2560 1376
+[pos] -1 -1
+*-20.000000 9334069000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] test_pwm.
+[sst_width] 233
+[signals_width] 126
+[sst_expanded] 1
+[sst_vpaned_height] 346
+@28
+test_pwm.PWM.clk
+@25
+test_pwm.PWM.counter[3:0]
+@24
+test_pwm.PWM.duty[3:0]
+@28
+test_pwm.PWM.duty_out
+test_pwm.PWM.ena
+test_pwm.PWM.out
+test_pwm.PWM.rst
+test_pwm.PWM.rst_count
+test_pwm.PWM.step
+[pattern_trace] 1
+[pattern_trace] 0

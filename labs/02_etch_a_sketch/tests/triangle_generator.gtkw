@@ -1,15 +1,15 @@
 [*]
-[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
-[*] Wed Oct 26 15:29:30 2022
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Mon Nov  7 04:43:27 2022
 [*]
-[dumpfile] "/home/avinash/src/cafe-instructors/labs/02_etch_a_sketch/triangle_generator.fst"
-[dumpfile_mtime] "Wed Oct 26 15:27:55 2022"
-[dumpfile_size] 733
-[savefile] "/home/avinash/src/cafe-instructors/labs/02_etch_a_sketch/tests/triangle_generator.gtkw"
+[dumpfile] "/home/marc/olin-cafe-f22/labs/02_etch_a_sketch/triangle_generator.fst"
+[dumpfile_mtime] "Mon Nov  7 04:43:06 2022"
+[dumpfile_size] 973
+[savefile] "/home/marc/olin-cafe-f22/labs/02_etch_a_sketch/tests/triangle_generator.gtkw"
 [timestart] 0
-[size] 2560 1440
-[pos] -6 -41
-*-20.269419 3210000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[size] 2560 1376
+[pos] -1 -1
+*-15.269419 31890 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] test_triangle_generator.
 [sst_width] 329
 [signals_width] 222
@@ -27,6 +27,9 @@ test_triangle_generator.UUT.out[3:0]
 @20000
 -
 -
+@23
+test_triangle_generator.UUT.count[3:0]
+@20000
 -
 [pattern_trace] 1
 [pattern_trace] 0

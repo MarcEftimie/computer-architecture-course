@@ -12,5 +12,14 @@ output logic out;
 logic [N-1:0] counter;
 logic counter_comparator;
 
+comparator_eq #(.N(N)) comparator_eq_0(.a(counter), .b(ticks), .out(out));
+
+always_ff @(posedge clk) begin
+  if (rst | out) begin
+    counter = 0;
+  end else if (ena) begin
+    counter++;
+  end
+end
 
 endmodule
