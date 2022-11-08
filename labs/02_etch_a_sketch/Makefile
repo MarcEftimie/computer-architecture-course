@@ -52,9 +52,6 @@ memories/ili9341_init.memh: generate_memories.py
 memories/fibonacci.memh: generate_memories.py
 	./generate_memories.py --memory fibonacci --out memories/fibonacci.memh
 
-<<<<<<< HEAD
-main.bit: $(MAIN_SRCS)
-=======
 test_block_rom : memories/fibonacci.memh hdl/block_rom.sv tests/test_block_rom.sv
 	${IVERILOG} hdl/block_rom.sv tests/test_block_rom.sv -o test_block_rom.bin && ${VVP} test_block_rom.bin ${VVP_POST}
 
@@ -73,34 +70,23 @@ test_main: tests/test_main.sv ${MAIN_SRCS} memories/ili9341_init.memh tests/ft62
 	${IVERILOG} tests/test_main.sv tests/ft6206_model.sv tests/touch_generator.sv ${MAIN_SRCS} -o test_main.bin && ${VVP} test_main.bin ${VVP_POST}
 
 main.bit: $(MAIN_SRCS) $(MAIN_MEMORIES) memories/ili9341_init.memh build.tcl main.xdc
->>>>>>> 51b9b3d164215c0fb2ec15a21ad15d2b6bbd9593
 	@echo "########################################"
 	@echo "#### Building FPGA bitstream        ####"
 	@echo "########################################"
 	${VIVADO} build.tcl
 
-<<<<<<< HEAD
-program_fpga_vivado: main.bit
-=======
 program_fpga_vivado: main.bit build.tcl program.tcl
->>>>>>> 51b9b3d164215c0fb2ec15a21ad15d2b6bbd9593
 	@echo "########################################"
 	@echo "#### Programming FPGA (Vivado)      ####"
 	@echo "########################################"
 	${VIVADO} program.tcl
 
-<<<<<<< HEAD
-program_fpga_digilent: main.bit
-=======
 program_fpga_digilent: main.bit build.tcl
->>>>>>> 51b9b3d164215c0fb2ec15a21ad15d2b6bbd9593
 	@echo "########################################"
 	@echo "#### Programming FPGA (Digilent)    ####"
 	@echo "########################################"
 	djtgcfg enum
 	djtgcfg prog -d CmodA7 -i 0 -f main.bit
-<<<<<<< HEAD
-=======
 
 lint: hdl/*.sv
 	verilator --lint-only -I./hdl -I./tests $^
@@ -113,4 +99,3 @@ clean:
 # Call this to generate your submission zip file.
 submission:
 	zip submission.zip Makefile hdl/*.sv README.md docs/* *.tcl *.xdc tests/*.sv tests/*.gtkw *.pdf
->>>>>>> 51b9b3d164215c0fb2ec15a21ad15d2b6bbd9593
