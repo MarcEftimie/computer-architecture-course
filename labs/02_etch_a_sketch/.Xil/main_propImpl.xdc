@@ -1,4 +1,4 @@
-set_property SRC_FILE_INFO {cfile:/home/rsiddique/Documents/olin-cafe-f22/labs/02_etch_a_sketch/main.xdc rfile:../main.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:/home/marc/olin-cafe-f22/labs/02_etch_a_sketch/main.xdc rfile:../main.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:5 export:INPUT save:INPUT read:READ} [current_design]
 set_property -dict { PACKAGE_PIN L17   IOSTANDARD LVCMOS33 } [get_ports { sysclk }]; #IO_L12P_T1_MRCC_14 Sch=gclk
 set_property src_info {type:XDC file:1 line:9 export:INPUT save:INPUT read:READ} [current_design]
