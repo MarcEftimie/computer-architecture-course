@@ -13,6 +13,8 @@ input wire [N-1:0] duty; // The "duty cycle" input.
 output logic out;
 
 logic [N-1:0] counter;
+logic rst_count;
+logic duty_out;
 
 // Create combinational (always_comb) and sequential (always_ff @(posedge clk)) 
 // logic that drives the out signal.
@@ -23,5 +25,23 @@ logic [N-1:0] counter;
 // You can use behavioural combinational logic, but try to keep your sequential
 //   and combinational blocks as separate as possible.
 
+comparator_eq #(.N(N)) comparator_eq_reset(.a(counter), .b((2**N)), .out(rst_count));
+comparator_eq #(.N(N)) comparator_eq_duty_cycle(.a(counter), .b(duty), .out(duty_out));
+
+always_ff @(posedge clk) begin
+  if(rst | rst_count) begin
+    counter <= 0;
+  end else if(ena) begin
+    counter <= counter + 1;
+  end
+end
+
+always_ff @(posedge clk) begin
+  if (rst) begin
+    out <= 1;
+  end else if(ena & (duty_out | rst_count)) begin
+    out <= ~out;
+  end
+end
 
 endmodule
