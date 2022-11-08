@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2022.1 (lin64) Build 3526262 Mon Apr 18 15:47:01 MDT 2022
-| Date         : Mon Nov  7 00:17:30 2022
+| Date         : Mon Nov  7 19:01:04 2022
 | Host         : marc-Precision-3551 running 64-bit Ubuntu 22.04.1 LTS
 | Command      : report_timing_summary -file timing_summary.log
 | Design       : main
@@ -136,7 +136,7 @@ Table of Contents
 
     WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
     -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-     11.568        0.000                      0                  267        0.164        0.000                      0                  267        7.638        0.000                       0                   145  
+     11.344        0.000                      0                  267        0.167        0.000                      0                  267        7.638        0.000                       0                   145  
 
 
 All user specified timing constraints are met.
@@ -163,7 +163,7 @@ Clock               WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpo
 -----               -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
 sys_clk_pin                                                                                                                                                      16.670        0.000                       0                     1  
   clk_feedback                                                                                                                                                   16.670        0.000                       0                     2  
-  pmod_OBUF[0]       11.568        0.000                      0                  267        0.164        0.000                      0                  267        7.638        0.000                       0                   142  
+  pmod_OBUF[0]       11.344        0.000                      0                  267        0.167        0.000                      0                  267        7.638        0.000                       0                   142  
 
 
 ------------------------------------------------------------------------------------------------
@@ -242,27 +242,27 @@ Max Period  n/a     MMCME2_ADV/CLKFBIN   n/a            100.000       83.330    
 From Clock:  pmod_OBUF[0]
   To Clock:  pmod_OBUF[0]
 
-Setup :            0  Failing Endpoints,  Worst Slack       11.568ns,  Total Violation        0.000ns
-Hold  :            0  Failing Endpoints,  Worst Slack        0.164ns,  Total Violation        0.000ns
+Setup :            0  Failing Endpoints,  Worst Slack       11.344ns,  Total Violation        0.000ns
+Hold  :            0  Failing Endpoints,  Worst Slack        0.167ns,  Total Violation        0.000ns
 PW    :            0  Failing Endpoints,  Worst Slack        7.638ns,  Total Violation        0.000ns
 ---------------------------------------------------------------------------------------------------
 
 
 Max Delay Paths
 --------------------------------------------------------------------------------------
-Slack (MET) :             11.568ns  (required time - arrival time)
-  Source:                 PWM_LED0/counter_reg[0]/C
+Slack (MET) :             11.344ns  (required time - arrival time)
+  Source:                 PULSE_10Hz/counter_reg[18]/C
                             (rising edge-triggered cell FDRE clocked by pmod_OBUF[0]  {rise@0.000ns fall@8.138ns period=16.275ns})
-  Destination:            PWM_LED0/out_reg/CE
-                            (rising edge-triggered cell FDSE clocked by pmod_OBUF[0]  {rise@0.000ns fall@8.138ns period=16.275ns})
+  Destination:            PULSE_10Hz/counter_reg[20]/R
+                            (rising edge-triggered cell FDRE clocked by pmod_OBUF[0]  {rise@0.000ns fall@8.138ns period=16.275ns})
   Path Group:             pmod_OBUF[0]
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            16.275ns  (pmod_OBUF[0] rise@16.275ns - pmod_OBUF[0] rise@0.000ns)
-  Data Path Delay:        4.442ns  (logic 1.062ns (23.910%)  route 3.380ns (76.090%))
-  Logic Levels:           3  (LUT5=2 LUT6=1)
-  Clock Path Skew:        -0.025ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    6.004ns = ( 22.279 - 16.275 ) 
-    Source Clock Delay      (SCD):    6.361ns
+  Data Path Delay:        4.239ns  (logic 0.854ns (20.148%)  route 3.385ns (79.852%))
+  Logic Levels:           3  (LUT2=1 LUT4=1 LUT6=1)
+  Clock Path Skew:        -0.026ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    6.002ns = ( 22.277 - 16.275 ) 
+    Source Clock Delay      (SCD):    6.360ns
     Clock Pessimism Removal (CPR):    0.332ns
   Clock Uncertainty:      0.036ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
     Total System Jitter     (TSJ):    0.071ns
@@ -281,18 +281,18 @@ Slack (MET) :             11.568ns  (required time - arrival time)
                                                       0.088     2.797 r  MMCME2_BASE_inst/CLKOUT0
                          net (fo=1, routed)           1.666     4.464    pmod_OBUF[0]
     BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.096     4.560 r  pmod_OBUF_BUFG[0]_inst/O
-                         net (fo=141, routed)         1.801     6.361    PWM_LED0/CLK
-    SLICE_X0Y116         FDRE                                         r  PWM_LED0/counter_reg[0]/C
+                         net (fo=141, routed)         1.800     6.360    PULSE_10Hz/CLK
+    SLICE_X3Y117         FDRE                                         r  PULSE_10Hz/counter_reg[18]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X0Y116         FDRE (Prop_fdre_C_Q)         0.456     6.817 r  PWM_LED0/counter_reg[0]/Q
-                         net (fo=8, routed)           0.827     7.644    PWM_LED0/counter_reg[0]
-    SLICE_X0Y116         LUT5 (Prop_lut5_I2_O)        0.124     7.768 r  PWM_LED0/counter[8]_i_3/O
-                         net (fo=5, routed)           0.925     8.693    PWM_LED0/counter[8]_i_3_n_0
-    SLICE_X0Y119         LUT5 (Prop_lut5_I2_O)        0.150     8.843 r  PWM_LED0/out_i_4/O
-                         net (fo=2, routed)           0.970     9.813    LED_FADER0/out_reg
-    SLICE_X1Y117         LUT6 (Prop_lut6_I1_O)        0.332    10.145 r  LED_FADER0/out_i_1/O
-                         net (fo=1, routed)           0.658    10.803    PWM_LED0/out_reg_0
-    SLICE_X1Y117         FDSE                                         r  PWM_LED0/out_reg/CE
+    SLICE_X3Y117         FDRE (Prop_fdre_C_Q)         0.456     6.816 r  PULSE_10Hz/counter_reg[18]/Q
+                         net (fo=2, routed)           0.814     7.630    PULSE_10Hz/counter_reg[18]
+    SLICE_X4Y117         LUT4 (Prop_lut4_I1_O)        0.124     7.754 r  PULSE_10Hz/count[8]_i_6/O
+                         net (fo=1, routed)           1.110     8.865    PULSE_10Hz/count[8]_i_6_n_0
+    SLICE_X1Y115         LUT6 (Prop_lut6_I3_O)        0.124     8.989 r  PULSE_10Hz/count[8]_i_1/O
+                         net (fo=12, routed)          0.755     9.744    PULSE_10Hz/pulse_10Hz
+    SLICE_X5Y116         LUT2 (Prop_lut2_I0_O)        0.150     9.894 r  PULSE_10Hz/counter[0]_i_1/O
+                         net (fo=24, routed)          0.705    10.599    PULSE_10Hz/counter[0]_i_1_n_0
+    SLICE_X3Y118         FDRE                                         r  PULSE_10Hz/counter_reg[20]/R
   -------------------------------------------------------------------    -------------------
 
                          (clock pmod_OBUF[0] rise edge)
@@ -305,16 +305,16 @@ Slack (MET) :             11.568ns  (required time - arrival time)
                                                       0.083    18.926 r  MMCME2_BASE_inst/CLKOUT0
                          net (fo=1, routed)           1.587    20.513    pmod_OBUF[0]
     BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    20.604 r  pmod_OBUF_BUFG[0]_inst/O
-                         net (fo=141, routed)         1.675    22.279    PWM_LED0/CLK
-    SLICE_X1Y117         FDSE                                         r  PWM_LED0/out_reg/C
-                         clock pessimism              0.332    22.611    
-                         clock uncertainty           -0.036    22.576    
-    SLICE_X1Y117         FDSE (Setup_fdse_C_CE)      -0.205    22.371    PWM_LED0/out_reg
+                         net (fo=141, routed)         1.673    22.277    PULSE_10Hz/CLK
+    SLICE_X3Y118         FDRE                                         r  PULSE_10Hz/counter_reg[20]/C
+                         clock pessimism              0.332    22.609    
+                         clock uncertainty           -0.036    22.574    
+    SLICE_X3Y118         FDRE (Setup_fdre_C_R)       -0.631    21.943    PULSE_10Hz/counter_reg[20]
   -------------------------------------------------------------------
-                         required time                         22.371    
-                         arrival time                         -10.803    
+                         required time                         21.943    
+                         arrival time                         -10.599    
   -------------------------------------------------------------------
-                         slack                                 11.568    
+                         slack                                 11.344    
 
 
 
@@ -322,20 +322,20 @@ Slack (MET) :             11.568ns  (required time - arrival time)
 
 Min Delay Paths
 --------------------------------------------------------------------------------------
-Slack (MET) :             0.164ns  (arrival time - required time)
-  Source:                 ILI9341/cfg_bytes_remaining_reg[0]/C
+Slack (MET) :             0.167ns  (arrival time - required time)
+  Source:                 LED_FADER1/count_reg[1]/C
                             (rising edge-triggered cell FDRE clocked by pmod_OBUF[0]  {rise@0.000ns fall@8.138ns period=16.275ns})
-  Destination:            ILI9341/cfg_bytes_remaining_reg[3]/D
+  Destination:            LED_FADER1/out_reg[1]/D
                             (rising edge-triggered cell FDRE clocked by pmod_OBUF[0]  {rise@0.000ns fall@8.138ns period=16.275ns})
   Path Group:             pmod_OBUF[0]
   Path Type:              Hold (Min at Fast Process Corner)
   Requirement:            0.000ns  (pmod_OBUF[0] rise@0.000ns - pmod_OBUF[0] rise@0.000ns)
-  Data Path Delay:        0.310ns  (logic 0.189ns (60.880%)  route 0.121ns (39.120%))
-  Logic Levels:           1  (LUT5=1)
+  Data Path Delay:        0.265ns  (logic 0.141ns (53.124%)  route 0.124ns (46.876%))
+  Logic Levels:           0  
   Clock Path Skew:        0.013ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    2.391ns
-    Source Clock Delay      (SCD):    1.842ns
-    Clock Pessimism Removal (CPR):    0.536ns
+    Destination Clock Delay (DCD):    2.476ns
+    Source Clock Delay      (SCD):    1.922ns
+    Clock Pessimism Removal (CPR):    0.540ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
@@ -349,14 +349,12 @@ Slack (MET) :             0.164ns  (arrival time - required time)
                                                       0.050     0.734 r  MMCME2_BASE_inst/CLKOUT0
                          net (fo=1, routed)           0.489     1.223    pmod_OBUF[0]
     BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     1.249 r  pmod_OBUF_BUFG[0]_inst/O
-                         net (fo=141, routed)         0.593     1.842    ILI9341/CLK
-    SLICE_X65Y56         FDRE                                         r  ILI9341/cfg_bytes_remaining_reg[0]/C
+                         net (fo=141, routed)         0.673     1.922    LED_FADER1/CLK
+    SLICE_X3Y111         FDRE                                         r  LED_FADER1/count_reg[1]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X65Y56         FDRE (Prop_fdre_C_Q)         0.141     1.983 r  ILI9341/cfg_bytes_remaining_reg[0]/Q
-                         net (fo=7, routed)           0.121     2.104    ILI9341/cfg_bytes_remaining_reg_n_0_[0]
-    SLICE_X64Y56         LUT5 (Prop_lut5_I1_O)        0.048     2.152 r  ILI9341/cfg_bytes_remaining[3]_i_1/O
-                         net (fo=1, routed)           0.000     2.152    ILI9341/cfg_bytes_remaining[3]_i_1_n_0
-    SLICE_X64Y56         FDRE                                         r  ILI9341/cfg_bytes_remaining_reg[3]/D
+    SLICE_X3Y111         FDRE (Prop_fdre_C_Q)         0.141     2.063 r  LED_FADER1/count_reg[1]/Q
+                         net (fo=6, routed)           0.124     2.188    LED_FADER1/count_reg[1]
+    SLICE_X2Y111         FDRE                                         r  LED_FADER1/out_reg[1]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock pmod_OBUF[0] rise edge)
@@ -369,15 +367,15 @@ Slack (MET) :             0.164ns  (arrival time - required time)
                                                       0.053     0.965 r  MMCME2_BASE_inst/CLKOUT0
                          net (fo=1, routed)           0.534     1.498    pmod_OBUF[0]
     BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.527 r  pmod_OBUF_BUFG[0]_inst/O
-                         net (fo=141, routed)         0.863     2.391    ILI9341/CLK
-    SLICE_X64Y56         FDRE                                         r  ILI9341/cfg_bytes_remaining_reg[3]/C
-                         clock pessimism             -0.536     1.855    
-    SLICE_X64Y56         FDRE (Hold_fdre_C_D)         0.133     1.988    ILI9341/cfg_bytes_remaining_reg[3]
+                         net (fo=141, routed)         0.948     2.476    LED_FADER1/CLK
+    SLICE_X2Y111         FDRE                                         r  LED_FADER1/out_reg[1]/C
+                         clock pessimism             -0.540     1.935    
+    SLICE_X2Y111         FDRE (Hold_fdre_C_D)         0.085     2.020    LED_FADER1/out_reg[1]
   -------------------------------------------------------------------
-                         required time                         -1.988    
-                         arrival time                           2.152    
+                         required time                         -2.020    
+                         arrival time                           2.188    
   -------------------------------------------------------------------
-                         slack                                  0.164    
+                         slack                                  0.167    
 
 
 
@@ -393,8 +391,8 @@ Sources:            { MMCME2_BASE_inst/CLKOUT0 }
 Check Type        Corner  Lib Pin             Reference Pin  Required(ns)  Actual(ns)  Slack(ns)  Location         Pin
 Min Period        n/a     BUFG/I              n/a            2.155         16.275      14.120     BUFGCTRL_X0Y0    pmod_OBUF_BUFG[0]_inst/I
 Max Period        n/a     MMCME2_ADV/CLKOUT0  n/a            213.360       16.275      197.085    MMCME2_ADV_X0Y0  MMCME2_BASE_inst/CLKOUT0
-Low Pulse Width   Slow    FDRE/C              n/a            0.500         8.138       7.638      SLICE_X65Y56     ILI9341/cfg_bytes_remaining_reg[0]/C
-High Pulse Width  Slow    FDRE/C              n/a            0.500         8.138       7.638      SLICE_X65Y56     ILI9341/cfg_bytes_remaining_reg[0]/C
+Low Pulse Width   Slow    FDRE/C              n/a            0.500         8.138       7.638      SLICE_X64Y57     ILI9341/cfg_bytes_remaining_reg[0]/C
+High Pulse Width  Slow    FDRE/C              n/a            0.500         8.138       7.638      SLICE_X64Y57     ILI9341/cfg_bytes_remaining_reg[0]/C
 
 
 
