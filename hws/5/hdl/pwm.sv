@@ -25,7 +25,7 @@ logic duty_out;
 // You can use behavioural combinational logic, but try to keep your sequential
 //   and combinational blocks as separate as possible.
 
-comparator_eq #(.N(N)) comparator_eq_reset(.a(counter), .b((2**N)), .out(rst_count));
+comparator_eq #(.N(N)) comparator_eq_reset(.a(counter), .b((2**N)-1), .out(rst_count));
 comparator_eq #(.N(N)) comparator_eq_duty_cycle(.a(counter), .b(duty), .out(duty_out));
 
 always_ff @(posedge clk) begin

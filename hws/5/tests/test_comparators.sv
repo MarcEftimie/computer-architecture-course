@@ -61,6 +61,11 @@ initial begin
   b = 38273;
   #1 print_io();
 
+  a = 'hae68305c;
+  b = 'h23907547;
+  #1 print_io();
+
+
   // Add more interesting tests here!
 
   

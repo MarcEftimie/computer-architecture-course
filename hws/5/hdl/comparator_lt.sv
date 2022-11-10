@@ -13,7 +13,7 @@ logic [N-1:0] neg_b;
 assign neg_b = ~b + 1;
 adder_n #(.N(32)) adder_32bit_a (.a(a), .b(neg_b), .c_in(1'b0), .sum(sum), .c_out(overflow));
 always_comb begin
-    out = (~overflow & sum[N-1] & ~a[N-1] & ~b[N-1]) | (~overflow & sum[N-1] & a[N-1] & b[N-1]) | (overflow & ~sum[N-1] & a[N-1] & ~b[N-1]);
+    out = (~overflow & sum[N-1] & ~a[N-1] & ~b[N-1]) | (~overflow & sum[N-1] & a[N-1] & b[N-1]) | (overflow & ~sum[N-1] & a[N-1] & ~b[N-1]) | (a[N-1] & ~b[N-1]);
 end
 endmodule
 
