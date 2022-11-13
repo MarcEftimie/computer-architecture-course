@@ -183,4 +183,17 @@ block_ram #(.W(VRAM_W), .L(VRAM_L)) VRAM(
 );
 // Add your vram control FSM here:
 
+always_ff @(negedge clk) begin
+  if(rst | vram_clear_counter != 0) begin
+    vram_wr_ena <= 1'b1;
+    for (int i = 0; i < vram_clear_counter; i++) begin
+      vram_wr_addr = i;
+    end
+    if(vram_clear_counter == {$clog2(VRAM_L)-1{1'b1}}) begin
+      vram_clear_counter = 0;
+    end
+  end
+end
+
+
 endmodule

@@ -8,7 +8,7 @@ VIVADO=vivado -mode batch -source
 ILI9341_SRCS=hdl/spi_controller.sv hdl/ili9341_display_controller.sv hdl/spi_types.sv hdl/ili9341_defines.sv hdl/block_rom.sv
 FT6206_SRCS=hdl/i2c_controller.sv hdl/ft6206_controller.sv hdl/i2c_types.sv hdl/ft6206_defines.sv 
 # Add any new source files needed for the final bitstream here
-MAIN_SRCS=hdl/main.sv hdl/pulse_generator.sv hdl/pwm.sv hdl/triangle_generator.sv hdl/block_ram.sv ${ILI9341_SRCS} ${FT6206_SRCS}
+MAIN_SRCS=hdl/main.sv hdl/pulse_generator.sv hdl/pwm.sv hdl/triangle_generator.sv hdl/block_ram.sv hdl/comparator_eq.sv ${ILI9341_SRCS} ${FT6206_SRCS}
 MAIN_MEMORIES=memories/ili9341_init.memh
 
 # Look up .PHONY rules for Makefiles
