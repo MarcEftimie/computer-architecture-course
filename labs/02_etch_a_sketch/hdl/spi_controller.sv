@@ -38,9 +38,7 @@ logic [23:0] rx_data;
 
 always_comb begin : csb_logic
   case(state)
-    // If Idle or Error, set high to prevent SPI transaction
     S_IDLE, S_ERROR : csb = 1;
-    // If transmitting or receving, set low to start SPI transaction
     S_TXING, S_TX_DONE, S_RXING, S_RX_DONE: csb = 0;
     default: csb = 1;
   endcase
@@ -63,24 +61,11 @@ checking the current value of sclk. If it's 1, we're about to go negative,
 so that's a negative edge.
 
 */
-
-logic [4:0] count;
-
 always_ff @(posedge clk) begin : spi_controller_fsm
   if(rst) begin
     state <= S_IDLE;
     sclk <= 0;
-    // bit_counter <= 0;
-    count <= 0;
-    case (spi_mode)
-      // Note, there is one extra FSM cycle that needs to be burned
-      // before we can start aquiring data, that's why it starts at N,
-      // not N-1 for this one. 
-      WRITE_8_READ_8  : bit_counter <= 5'd8;
-      WRITE_8_READ_16 : bit_counter <= 5'd16;
-      WRITE_8_READ_24 : bit_counter <= 5'd24;
-      default : bit_counter <= 0;
-    endcase
+    bit_counter <= 0;
     o_valid <= 0;
     i_ready <= 1;
     tx_data <= 0;
@@ -89,13 +74,28 @@ always_ff @(posedge clk) begin : spi_controller_fsm
   end else begin
     case(state)
       S_IDLE : begin
+        i_ready <= 1;
+        sclk <= 0;
+        if(i_valid) begin
+          tx_data <= i_data;
+          rx_data <= 0;
+          i_ready <= 0;
+          o_valid <= 0;
+          state <= S_TXING;
+          case (spi_mode) 
+            WRITE_16 : bit_counter <= 5'd15;
+            WRITE_8 : bit_counter <= 5'd7;
+            default : bit_counter <= 5'd7;
+          endcase
+
+        end
       end
       S_TXING : begin
         sclk <= ~sclk;
         // positive edge logic
         if(~sclk) begin
         end else begin // negative edge logic
-          // transmit data serially
+          
           if(bit_counter != 0) begin
             bit_counter <= bit_counter - 1;
           end else begin
@@ -122,24 +122,26 @@ always_ff @(posedge clk) begin : spi_controller_fsm
           WRITE_8_READ_24 : bit_counter <= 5'd24;
           default : bit_counter <= 0;
         endcase
-        count <= 0;
       end
-      S_RXING: begin
+      S_RXING : begin
         sclk <= ~sclk;
-
-        if(~sclk) begin
-          // sample input serially
-          if(count != bit_counter) begin
-            rx_data[count] <= miso;
-            count <= count + 1;
+        if(~sclk) begin // positive edge logic
+          if(bit_counter != 0) begin
+            bit_counter <= bit_counter - 1;
           end else begin
-            count <= 0;
-            state <= S_RX_DONE;
+            case(spi_mode)
+              WRITE_8_READ_8 : o_data <= {16'b0, rx_data[7:0]};
+              WRITE_8_READ_16: o_data <= { 8'b0, rx_data[15:0]};
+              WRITE_8_READ_24: o_data <= rx_data[23:0];
+              default:         o_data <= 0;
+            endcase
+            o_valid <= 1;
+            state <= S_IDLE;
+            i_ready <= 1; // This logic would have to change if we wanted to use o_ready.
           end
+        end else begin // negative edge logic
+          rx_data[bit_counter] <= miso;
         end
-      end
-      S_RX_DONE: begin
-        // do something with rx data and reset it to 0
       end
       default : state <= S_ERROR;
     endcase

@@ -2,8 +2,8 @@
 # Vivado v2022.1 (64-bit)
 # SW Build 3526262 on Mon Apr 18 15:47:01 MDT 2022
 # IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
-# Start of session at: Mon Nov  7 21:21:50 2022
-# Process ID: 188126
+# Start of session at: Sun Nov 13 16:58:46 2022
+# Process ID: 32261
 # Current directory: /home/marc/olin-cafe-f22/labs/02_etch_a_sketch
 # Command line: vivado -mode batch -source program.tcl
 # Log file: /home/marc/olin-cafe-f22/labs/02_etch_a_sketch/vivado.log
@@ -12,7 +12,7 @@
 #-----------------------------------------------------------
 source program.tcl
 # open_hw_manager
-open_hw_manager: Time (s): cpu = 00:00:17 ; elapsed = 00:00:12 . Memory (MB): peak = 2615.070 ; gain = 8.930 ; free physical = 7326 ; free virtual = 13664
+open_hw_manager: Time (s): cpu = 00:00:17 ; elapsed = 00:00:12 . Memory (MB): peak = 2615.070 ; gain = 8.930 ; free physical = 10281 ; free virtual = 15296
 # connect_hw_server
 INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
 INFO: [Labtools 27-2222] Launching hw_server...
@@ -44,8 +44,8 @@ INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/
 INFO: [Labtools 27-3164] End of startup status: HIGH
 # refresh_hw_device [lindex [get_hw_devices] 0]
 INFO: [Labtools 27-1434] Device xc7a15t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
-refresh_hw_device: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 3572.254 ; gain = 941.000 ; free physical = 5338 ; free virtual = 11740
+refresh_hw_device: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 3572.254 ; gain = 941.000 ; free physical = 8264 ; free virtual = 13345
 # close_hw_target
 INFO: [Labtoolstcl 44-464] Closing hw_target localhost:3121/xilinx_tcf/Digilent/210328B253D6A
 # close_hw_manager
-INFO: [Common 17-206] Exiting Vivado at Mon Nov  7 21:22:22 2022...
+INFO: [Common 17-206] Exiting Vivado at Sun Nov 13 16:59:19 2022...
