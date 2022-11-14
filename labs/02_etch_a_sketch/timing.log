@@ -1,0 +1,168 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.1 (lin64) Build 3526262 Mon Apr 18 15:47:01 MDT 2022
+| Date         : Sun Nov 13 20:41:42 2022
+| Host         : rsiddique running 64-bit Ubuntu 20.04.5 LTS
+| Command      : report_timing -sort_by group -max_paths 100 -path_type summary -file timing.log -verbose
+| Design       : main
+| Device       : 7a15t-cpg236
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+----------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Startpoint                     Endpoint                       Slack(ns)     
+----------------------------------------------------------------------------
+FT6206/touch0_reg[x][5]/C      vram_wr_addr_reg[2]/D          0.076         
+FT6206/touch0_reg[x][4]/C      vram_wr_addr_reg[1]/D          0.076         
+FT6206/touch0_reg[x][4]/C      vram_wr_addr_reg[6]/D          0.078         
+FT6206/touch0_reg[x][4]/C      vram_wr_addr_reg[3]/D          0.080         
+FT6206/touch0_reg[x][4]/C      vram_wr_addr_reg[11]/D         0.095         
+FT6206/touch0_reg[x][4]/C      vram_wr_addr_reg[7]/D          0.096         
+FT6206/touch0_reg[x][5]/C      vram_wr_addr_reg[16]/D         0.107         
+FT6206/touch0_reg[x][5]/C      vram_wr_addr_reg[12]/D         0.109         
+FT6206/touch0_reg[x][5]/C      vram_wr_addr_reg[8]/D          0.110         
+FT6206/touch0_reg[x][5]/C      vram_wr_addr_reg[4]/D          0.112         
+FT6206/touch0_reg[x][5]/C      vram_wr_addr_reg[0]/D          0.123         
+FT6206/touch0_reg[x][4]/C      vram_wr_addr_reg[9]/D          0.204         
+FT6206/touch0_reg[x][4]/C      vram_wr_addr_reg[15]/D         0.215         
+FT6206/touch0_reg[x][4]/C      vram_wr_addr_reg[10]/D         0.216         
+FT6206/touch0_reg[x][4]/C      vram_wr_addr_reg[13]/D         0.219         
+FT6206/touch0_reg[x][4]/C      vram_wr_addr_reg[14]/D         0.219         
+FT6206/touch0_reg[x][4]/C      vram_wr_addr_reg[5]/D          0.222         
+vram_wr_addr_reg[12]/C         VRAM/ram_reg_0_0/ADDRARDADDR[12]
+                                                              4.294         
+vram_wr_addr_reg[16]/C         VRAM/ram_reg_1_5/WEA[0]        4.459         
+FT6206/touch0_reg[valid]/C     vram_wr_addr_reg[11]/CE        4.549         
+FT6206/touch0_reg[valid]/C     vram_wr_addr_reg[13]/CE        4.549         
+FT6206/touch0_reg[valid]/C     vram_wr_addr_reg[14]/CE        4.549         
+FT6206/touch0_reg[valid]/C     vram_wr_addr_reg[15]/CE        4.549         
+vram_wr_addr_reg[12]/C         VRAM/ram_reg_1_0/ADDRARDADDR[12]
+                                                              4.627         
+vram_wr_addr_reg[16]/C         VRAM/ram_reg_0_0/WEA[0]        4.646         
+FT6206/touch0_reg[valid]/C     vram_wr_addr_reg[16]/CE        4.654         
+FT6206/touch0_reg[valid]/C     vram_wr_addr_reg[12]/CE        4.661         
+FT6206/touch0_reg[valid]/C     vram_wr_addr_reg[10]/CE        4.691         
+FT6206/touch0_reg[valid]/C     vram_wr_addr_reg[6]/CE         4.691         
+FT6206/touch0_reg[valid]/C     vram_wr_addr_reg[7]/CE         4.691         
+FT6206/touch0_reg[valid]/C     vram_wr_addr_reg[8]/CE         4.699         
+FT6206/touch0_reg[valid]/C     vram_wr_addr_reg[2]/CE         4.700         
+FT6206/touch0_reg[valid]/C     vram_wr_addr_reg[4]/CE         4.700         
+FT6206/touch0_reg[valid]/C     vram_wr_addr_reg[0]/CE         4.793         
+vram_wr_addr_reg[16]/C         VRAM/ram_reg_0_5/WEA[0]        4.805         
+FT6206/touch0_reg[valid]/C     vram_wr_addr_reg[1]/CE         4.845         
+FT6206/touch0_reg[valid]/C     vram_wr_addr_reg[3]/CE         4.845         
+FT6206/touch0_reg[valid]/C     vram_wr_addr_reg[5]/CE         4.845         
+FT6206/touch0_reg[valid]/C     vram_wr_addr_reg[9]/CE         4.845         
+vram_wr_addr_reg[15]/C         VRAM/ram_reg_1_11__0/ENARDEN   4.891         
+vram_wr_addr_reg[15]/C         VRAM/ram_reg_1_0__0/ENARDEN    4.959         
+vram_wr_addr_reg[12]/C         VRAM/ram_reg_0_11/ADDRARDADDR[12]
+                                                              4.960         
+vram_wr_addr_reg[16]/C         VRAM/ram_reg_1_0/WEA[0]        4.980         
+vram_wr_addr_reg[16]/C         VRAM/ram_reg_1_0/ENARDEN       5.040         
+vram_wr_addr_reg[5]/C          VRAM/ram_reg_0_5/ADDRARDADDR[5]
+                                                              5.065         
+vram_wr_addr_reg[16]/C         VRAM/ram_reg_1_11/WEA[0]       5.087         
+vram_wr_addr_reg[15]/C         VRAM/ram_reg_1_11/ENARDEN      5.126         
+vram_wr_addr_reg[16]/C         VRAM/ram_reg_0_0/ENARDEN       5.151         
+FT6206/touch0_reg[valid]/C     vram_wr_ena_reg/D              5.162         
+vram_wr_addr_reg[16]/C         VRAM/ram_reg_1_5/ENARDEN       5.192         
+vram_wr_addr_reg[16]/C         VRAM/ram_reg_0_11/WEA[0]       5.195         
+vram_wr_addr_reg[14]/C         VRAM/ram_reg_0_0/ADDRARDADDR[14]
+                                                              5.211         
+vram_wr_addr_reg[16]/C         VRAM/ram_reg_0_5/ENARDEN       5.218         
+vram_wr_addr_reg[11]/C         VRAM/ram_reg_0_0/ADDRARDADDR[11]
+                                                              5.225         
+vram_wr_addr_reg[13]/C         VRAM/ram_reg_0_0/ADDRARDADDR[13]
+                                                              5.225         
+vram_wr_addr_reg[11]/C         VRAM/ram_reg_0_5/ADDRARDADDR[11]
+                                                              5.282         
+vram_wr_addr_reg[15]/C         VRAM/ram_reg_0_11/ADDRARDADDR[15]
+                                                              5.289         
+vram_wr_addr_reg[12]/C         VRAM/ram_reg_1_11/ADDRARDADDR[12]
+                                                              5.301         
+vram_wr_addr_reg[15]/C         VRAM/ram_reg_1_5__0/ENARDEN    5.303         
+vram_wr_addr_reg[5]/C          VRAM/ram_reg_1_5/ADDRARDADDR[5]
+                                                              5.398         
+vram_wr_addr_reg[5]/C          VRAM/ram_reg_1_0__0/ADDRARDADDR[5]
+                                                              5.406         
+vram_wr_addr_reg[12]/C         VRAM/ram_reg_0_5/ADDRARDADDR[12]
+                                                              5.528         
+vram_wr_addr_reg[0]/C          VRAM/ram_reg_1_11__0/ADDRARDADDR[0]
+                                                              5.529         
+vram_wr_addr_reg[0]/C          VRAM/ram_reg_0_0/ADDRARDADDR[0]
+                                                              5.531         
+vram_wr_addr_reg[13]/C         VRAM/ram_reg_0_5/ADDRARDADDR[13]
+                                                              5.537         
+vram_wr_addr_reg[14]/C         VRAM/ram_reg_1_0/ADDRARDADDR[14]
+                                                              5.544         
+vram_wr_addr_reg[2]/C          VRAM/ram_reg_1_11__0/ADDRARDADDR[2]
+                                                              5.546         
+vram_wr_addr_reg[2]/C          VRAM/ram_reg_0_0/ADDRARDADDR[2]
+                                                              5.548         
+vram_wr_addr_reg[11]/C         VRAM/ram_reg_1_0/ADDRARDADDR[11]
+                                                              5.558         
+vram_wr_addr_reg[13]/C         VRAM/ram_reg_1_0/ADDRARDADDR[13]
+                                                              5.558         
+vram_wr_addr_reg[16]/C         VRAM/ram_reg_0_11/ENARDEN      5.562         
+vram_wr_addr_reg[14]/C         VRAM/ram_reg_0_5/ADDRARDADDR[14]
+                                                              5.577         
+vram_wr_addr_reg[9]/C          VRAM/ram_reg_1_11__0/ADDRARDADDR[9]
+                                                              5.599         
+vram_wr_addr_reg[15]/C         VRAM/ram_reg_1_11/ADDRARDADDR[15]
+                                                              5.601         
+vram_wr_addr_reg[9]/C          VRAM/ram_reg_0_0/ADDRARDADDR[9]
+                                                              5.601         
+vram_wr_addr_reg[8]/C          VRAM/ram_reg_1_11__0/ADDRARDADDR[8]
+                                                              5.603         
+vram_wr_addr_reg[8]/C          VRAM/ram_reg_0_0/ADDRARDADDR[8]
+                                                              5.605         
+vram_wr_addr_reg[3]/C          VRAM/ram_reg_1_11__0/ADDRARDADDR[3]
+                                                              5.615         
+vram_wr_addr_reg[5]/C          VRAM/ram_reg_1_11__0/ADDRARDADDR[5]
+                                                              5.615         
+vram_wr_addr_reg[11]/C         VRAM/ram_reg_1_5/ADDRARDADDR[11]
+                                                              5.615         
+vram_wr_addr_reg[3]/C          VRAM/ram_reg_0_0/ADDRARDADDR[3]
+                                                              5.617         
+vram_wr_addr_reg[5]/C          VRAM/ram_reg_0_0/ADDRARDADDR[5]
+                                                              5.617         
+vram_wr_addr_reg[7]/C          VRAM/ram_reg_1_11__0/ADDRARDADDR[7]
+                                                              5.620         
+vram_wr_addr_reg[7]/C          VRAM/ram_reg_0_0/ADDRARDADDR[7]
+                                                              5.622         
+vram_wr_addr_reg[11]/C         VRAM/ram_reg_1_0__0/ADDRARDADDR[11]
+                                                              5.623         
+vram_wr_addr_reg[6]/C          VRAM/ram_reg_1_11__0/ADDRARDADDR[6]
+                                                              5.637         
+vram_wr_addr_reg[6]/C          VRAM/ram_reg_0_0/ADDRARDADDR[6]
+                                                              5.639         
+vram_wr_addr_reg[12]/C         VRAM/ram_reg_1_11__0/ADDRARDADDR[12]
+                                                              5.644         
+vram_wr_addr_reg[3]/C          VRAM/ram_reg_1_0__0/ADDRARDADDR[3]
+                                                              5.651         
+vram_wr_addr_reg[10]/C         VRAM/ram_reg_1_0__0/ADDRARDADDR[10]
+                                                              5.659         
+vram_wr_addr_reg[9]/C          VRAM/ram_reg_1_0__0/ADDRARDADDR[9]
+                                                              5.664         
+vram_wr_addr_reg[0]/C          VRAM/ram_reg_1_0__0/ADDRARDADDR[0]
+                                                              5.685         
+vram_wr_addr_reg[4]/C          VRAM/ram_reg_1_11__0/ADDRARDADDR[4]
+                                                              5.738         
+vram_wr_addr_reg[5]/C          VRAM/ram_reg_1_5__0/ADDRARDADDR[5]
+                                                              5.739         
+vram_wr_addr_reg[4]/C          VRAM/ram_reg_0_0/ADDRARDADDR[4]
+                                                              5.740         
+vram_wr_addr_reg[1]/C          VRAM/ram_reg_1_0__0/ADDRARDADDR[1]
+                                                              5.748         
+vram_wr_addr_reg[1]/C          VRAM/ram_reg_1_11__0/ADDRARDADDR[1]
+                                                              5.756         
+vram_wr_addr_reg[1]/C          VRAM/ram_reg_0_0/ADDRARDADDR[1]
+                                                              5.758         
+vram_wr_addr_reg[6]/C          VRAM/ram_reg_1_0__0/ADDRARDADDR[6]
+                                                              5.759         
+vram_wr_addr_reg[10]/C         VRAM/ram_reg_1_11__0/ADDRARDADDR[10]
+                                                              5.762         
+
+
+

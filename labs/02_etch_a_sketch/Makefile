@@ -69,6 +69,9 @@ test_main: tests/test_main.sv ${MAIN_SRCS} memories/ili9341_init.memh tests/ft62
 	@echo "This might take a while, we're testing a lot of clock cycles!"
 	${IVERILOG} tests/test_main.sv tests/ft6206_model.sv tests/touch_generator.sv ${MAIN_SRCS} -o test_main.bin && ${VVP} test_main.bin ${VVP_POST}
 
+waves_main:
+	gtkwave main.fst -a tests/main.gtkw
+
 main.bit: $(MAIN_SRCS) $(MAIN_MEMORIES) memories/ili9341_init.memh build.tcl main.xdc
 	@echo "########################################"
 	@echo "#### Building FPGA bitstream        ####"

@@ -118,12 +118,11 @@ pwm #(.N(PWM_WIDTH)) PWM_LED1 (
 always_comb begin: led_pwm_muxes
 `ifdef LAB_PART_1
   // For part 1, use the output of the triangle generators.
-  led_pwm0 = triangle0;
-  led_pwm1 = triangle1;
-`else
-  // For parts 2+, it's helpful to see the touch signals on the LEDs.
   led_pwm0 = touch0.valid ? touch0.x : 0;
   led_pwm1 = touch0.valid ? touch0.y : 0;
+`else
+  // For parts 2+, it's helpful to see the touch signals on the LEDs.
+  
 `endif // LAB_PART_1
 end
 
@@ -149,7 +148,7 @@ ili9341_display_controller ILI9341(
   .vram_rd_addr(vram_rd_addr),
   .vram_rd_data(vram_rd_data),
   // !!! NOTE - change enable_test_pattern to zero once you start implementing the video ram !!!
-  .enable_test_pattern(1'b1) 
+  .enable_test_pattern(1'b0) 
 );
 
 /* ------------------------------------------------------------------------- */
@@ -181,16 +180,29 @@ block_ram #(.W(VRAM_W), .L(VRAM_L)) VRAM(
   .clk(clk), .rd_addr(vram_rd_addr), .rd_data(vram_rd_data),
   .wr_ena(vram_wr_ena), .wr_addr(vram_wr_addr), .wr_data(vram_wr_data)
 );
-// Add your vram control FSM here:
 
+// Add your vram control FSM here:
 always_ff @(negedge clk) begin
-  if(rst | vram_clear_counter != 0) begin
-    vram_wr_ena <= 1'b1;
-    for (int i = 0; i < vram_clear_counter; i++) begin
-      vram_wr_addr = i;
-    end
-    if(vram_clear_counter == {$clog2(VRAM_L)-1{1'b1}}) begin
+  
+  if(rst | vram_clear_counter != {$clog2(VRAM_L){1'b1}} - 1) begin
+    vram_wr_ena <= 1;
+    if(rst == 1) begin
       vram_clear_counter = 0;
+    end
+    vram_wr_data <= RED;
+    vram_wr_addr <= vram_clear_counter;
+    vram_clear_counter <= vram_clear_counter + 1;
+  end else begin
+    vram_wr_ena <= 0;
+    if(touch0.valid == 1) begin
+      vram_wr_ena <= 1;
+      vram_wr_addr <= (touch0.y * 240) + (touch0.x % 240);
+      vram_wr_data <= DARKGREEN;
+    end
+    if(touch1.valid == 1) begin
+      vram_wr_ena <= 1;
+      vram_wr_addr <= (touch1.y * 240) + (touch1.x % 240);
+      vram_wr_data <= DARKGREEN;
     end
   end
 end

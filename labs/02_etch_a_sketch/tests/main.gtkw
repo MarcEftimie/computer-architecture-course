@@ -1,0 +1,43 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Mon Nov 14 01:05:50 2022
+[*]
+[dumpfile] "/home/rsiddique/Documents/olin-cafe-f22/labs/02_etch_a_sketch/main.fst"
+[dumpfile_mtime] "Mon Nov 14 01:05:12 2022"
+[dumpfile_size] 3198852
+[savefile] "/home/rsiddique/Documents/olin-cafe-f22/labs/02_etch_a_sketch/tests/main.gtkw"
+[timestart] 5372491000
+[size] 2488 1403
+[pos] -1 -1
+*-18.000000 353000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] test_main.
+[treeopen] test_main.UUT.
+[sst_width] 233
+[signals_width] 222
+[sst_expanded] 1
+[sst_vpaned_height] 423
+@28
+test_main.clk
+test_main.UUT.rst
+@24
+test_main.UUT.vram_clear_counter[16:0]
+@22
+test_main.UUT.vram_rd_addr[16:0]
+test_main.UUT.vram_rd_data[15:0]
+@24
+test_main.UUT.vram_wr_addr[16:0]
+@22
+test_main.UUT.vram_wr_data[15:0]
+@28
+test_main.UUT.vram_wr_ena
+@200
+-
+@22
+test_main.UUT.VRAM.rd_addr[16:0]
+test_main.UUT.VRAM.rd_data[15:0]
+test_main.UUT.VRAM.wr_addr[16:0]
+test_main.UUT.VRAM.wr_data[15:0]
+@28
+test_main.UUT.VRAM.wr_ena
+[pattern_trace] 1
+[pattern_trace] 0

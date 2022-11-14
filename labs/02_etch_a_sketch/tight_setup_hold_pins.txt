@@ -1,0 +1,11 @@
++====================+===================+========================+
+| Launch Setup Clock | Launch Hold Clock | Pin                    |
++====================+===================+========================+
+| pmod_OBUF[0]       | pmod_OBUF[0]      | vram_wr_addr_reg[4]/D  |
+| pmod_OBUF[0]       | pmod_OBUF[0]      | vram_wr_addr_reg[13]/D |
+| pmod_OBUF[0]       | pmod_OBUF[0]      | vram_wr_addr_reg[5]/D  |
+| pmod_OBUF[0]       | pmod_OBUF[0]      | vram_wr_addr_reg[1]/D  |
+| pmod_OBUF[0]       | pmod_OBUF[0]      | vram_wr_addr_reg[14]/D |
+| pmod_OBUF[0]       | pmod_OBUF[0]      | vram_wr_addr_reg[9]/D  |
+| pmod_OBUF[0]       | pmod_OBUF[0]      | vram_wr_addr_reg[10]/D |
++--------------------+-------------------+------------------------+
