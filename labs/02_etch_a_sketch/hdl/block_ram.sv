@@ -4,7 +4,7 @@
 
 module block_ram(clk, rd_addr, rd_data, wr_ena, wr_addr, wr_data);
 
-parameter W = 8; // Width of each row of  the memory
+parameter W = 8; // Width of each row of the memory
 parameter L = 32; // Length fo the memory
 parameter INIT = "zeros.memh";
 
