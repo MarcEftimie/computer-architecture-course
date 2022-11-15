@@ -110,7 +110,9 @@ ILI9341_register_t current_command;
 */
 
 always_comb case(state)
+  // When starting a frame, set input valid high
   S_START_FRAME, S_TX_PIXEL_DATA_START : i_valid = 1;
+  // When initializing and sending command and data, set input valid high
   S_INIT : begin
     case(cfg_state)
       S_CFG_SEND_CMD, S_CFG_SEND_DATA: i_valid = 1;
@@ -119,24 +121,30 @@ always_comb case(state)
   end
   default: i_valid = 0;
 endcase
-  
+
+// When starting a frame, set our current command to RAM write
 always_comb case (state) 
   S_START_FRAME : current_command = RAMWR;
   default : current_command = NOP;
 endcase
 
 always_comb case(state)
+  // Draw from rom data
   S_INIT: i_data = {8'd0, rom_data};
+  // Send current command
   S_START_FRAME: i_data = {8'd0, current_command};
   default: i_data = vram_rd_data_valid ? vram_rd_data : pixel_color;
 endcase
 
+
 always_comb case (state)
+  // Setting write mode when starting a frame
   S_INIT, S_START_FRAME: spi_mode = WRITE_8;
   default : spi_mode = WRITE_16;
 endcase
 
 always_comb begin
+  // Tells fsm when we're at the last pixel of each row and column respectively
   hsync = pixel_x == (DISPLAY_WIDTH-1);
   vsync = hsync & (pixel_y == (DISPLAY_HEIGHT-1));
 end
@@ -178,7 +186,9 @@ end
 logic [$clog2(CFG_CMD_DELAY):0] cfg_delay_counter;
 logic [7:0] cfg_bytes_remaining;
 
+// Reads from ROM through SPI controller and increments pixel position data
 always_ff @(posedge clk) begin : main_fsm
+  // Reset state to initialize and config state to get size data
   if(rst) begin
     state <= S_INIT;
     cfg_state <= S_CFG_GET_DATA_SIZE;
@@ -191,18 +201,23 @@ always_ff @(posedge clk) begin : main_fsm
     data_commandb <= 1;
   end
   else if(ena) begin
+    // Multiplexer for state variable
     case (state)
+      // Initialization process
       S_INIT: begin
         case (cfg_state)
+          // Get the size of the data in the rom for each address
           S_CFG_GET_DATA_SIZE : begin
             cfg_state_after_wait <= S_CFG_GET_CMD;
             cfg_state <= S_CFG_MEM_WAIT;
             rom_addr <= rom_addr + 1;
             case(rom_data) 
+              // Initialize delay counter
               8'hFF: begin
                 cfg_bytes_remaining <= 0;
                 cfg_delay_counter <= CFG_CMD_DELAY;
               end
+              // Reset delay counter
               8'h00: begin
                 cfg_bytes_remaining <= 0;
                 cfg_delay_counter <= 0;
@@ -214,10 +229,12 @@ always_ff @(posedge clk) begin : main_fsm
               end
             endcase
           end
+          // Tell cfg to wait then send the command once command is fetched
           S_CFG_GET_CMD: begin
             cfg_state_after_wait <= S_CFG_SEND_CMD;
             cfg_state <= S_CFG_MEM_WAIT;
           end
+          // Set the commands to wait and fetch data from SPI controller
           S_CFG_SEND_CMD : begin
             data_commandb <= 0;
             if(rom_data == 0) begin
@@ -227,6 +244,7 @@ always_ff @(posedge clk) begin : main_fsm
               cfg_state_after_wait <= S_CFG_GET_DATA;
             end
           end
+          // If there is still rom data to be fetched, wait for SPI and then fetch that data
           S_CFG_GET_DATA: begin
             data_commandb <= 1;
             rom_addr <= rom_addr + 1;
@@ -239,10 +257,12 @@ always_ff @(posedge clk) begin : main_fsm
               cfg_state <= S_CFG_MEM_WAIT;
             end
           end
+          // Set commands to send data through SPI
           S_CFG_SEND_DATA: begin
             cfg_state_after_wait <= S_CFG_GET_DATA;
             cfg_state <= S_CFG_SPI_WAIT;
           end
+          // Begin drawing the frame by sending pixel data
           S_CFG_DONE : begin
             state <= S_START_FRAME; // S_TX_PIXEL_DATA_START; //TODO@(avinash)
           end
@@ -261,24 +281,29 @@ always_ff @(posedge clk) begin : main_fsm
           default: cfg_state <= S_CFG_DONE;
         endcase
       end
+      // Wait for spi input to be ready
       S_WAIT_FOR_SPI: begin
         if(i_ready) begin
           state <= state_after_wait;
         end
       end
+      // Set commands to wait for SPI and then send pixel data
       S_START_FRAME: begin
         data_commandb <= 0;
         state <= S_WAIT_FOR_SPI;
         state_after_wait <= S_TX_PIXEL_DATA_START;
       end
+      // Set commands to wait fro SPI and then increment the pixel position value
       S_TX_PIXEL_DATA_START: begin
         data_commandb <= 1;
         state_after_wait <= S_INCREMENT_PIXEL;
         state <= S_WAIT_FOR_SPI;
       end
+      // Wait for SPI input to be ready before incrementing pixel position
       S_TX_PIXEL_DATA_BUSY: begin
         if(i_ready) state <= S_INCREMENT_PIXEL;
       end
+      // Incremement pixel position
       S_INCREMENT_PIXEL: begin
         state <= S_TX_PIXEL_DATA_START;
         if(pixel_x < (DISPLAY_WIDTH-1)) begin
