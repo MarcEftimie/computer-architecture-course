@@ -3,6 +3,9 @@
 
 `include "alu_types.sv"
 
+// H&H 7.3 to 7.4
+// H&H e9.1 to 9.2 - (online only chapter, available here) - goal is to understand the idea behind FIgure e9.1.
+
 module alu_behavioural(a, b, control, result, overflow, zero, equal);
 parameter N = 32;
 
