@@ -21,6 +21,8 @@ RV32I_SRCS=${RFILE_SRCS} ${ALU_SRCS} ${MMU_SRCS} hdl/rv32i_defines.sv hdl/rv32i_
 test_register_file: tests/test_register_file.sv ${RFILE_SRCS}
 	${IVERILOG} $^ -o test_register_file.bin && ${VVP} test_register_file.bin ${VVP_POST}
 
+test_sign_extender: tests/test_sign_extender.sv
+	${IVERILOG} $^ -o test_sign_extender.bin && ${VVP} test_sign_extender.bin ${VVP_POST}
 # Modify the -DINITIAL_INST_MEM string to change the initial memory.
 test_rv32i_itypes: tests/test_rv32i_system.sv asm/itypes.memh ${RV32I_SRCS}
 	${IVERILOG} -DINITIAL_INST_MEM=\"asm/itypes.memh\" tests/test_rv32i_system.sv ${RV32I_SRCS} -s test_rv32i_system -o test_rv32i_system.bin && ${VVP} test_rv32i_system.bin ${VVP_POST}
