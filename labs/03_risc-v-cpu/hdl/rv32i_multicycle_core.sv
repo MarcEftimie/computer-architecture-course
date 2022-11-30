@@ -97,7 +97,139 @@ alu_behavioural ALU (
 
 // Implement your multicycle rv32i CPU here!
 
-wire ir_write;
+logic [3:0] counter;
+logic [1:0] alu_op;
+always_comb begin : ALU_DECODER
+
+  case (alu_op)
+    2'b00 : alu_control = ALU_ADD;
+    2'b01 : alu_control = ALU_SUB;
+    2'b10 : begin
+      case (instruction[14:12])
+        3'b000 : begin
+          case ({instruction[5], instruction[29]})
+            2'b11 : alu_control = ALU_SUB;
+            default : alu_control = ALU_ADD;
+          endcase
+        end
+        3'b010 : alu_control = ALU_SLT;
+        3'b110 : alu_control = ALU_OR;
+        3'b111 : alu_control = ALU_AND;
+      endcase
+    end
+      
+  endcase
+end
+
+always_ff @(posedge clk) begin
+  // if (counter == 4'bxxxx) begin
+  //   counter <= 0;
+  // end
+  case (instruction[6:0])
+    7'b0000011 : alu_op <= 2'b00;
+    7'b0100011 : alu_op <= 2'b01;
+    7'b0110011 : alu_op <= 2'bxx;
+    7'b1100011 : alu_op <= 2'b10;
+    7'b0010011 : alu_op <= 2'b10;
+  endcase
+  case (counter)
+    4 : begin
+      case (instruction[6:0])
+        // MemWB
+        7'b0000011 : begin
+          result_src <= 2'b01;
+          reg_write <= 1;
+          counter <= counter + 1;
+        end
+      endcase
+    end
+    3: begin
+      case (instruction[6:0])
+        // MemRead
+        7'b0000011 : begin
+          adr_src <= 1;
+          result_src <= 2'b00;
+          counter <= counter + 1;
+        end
+        // MemWrite
+        7'b0100011 : begin
+          result_src <= 2'b00;
+          adr_src <= 1;
+          mem_wr_ena <= 1;
+          counter <= counter + 2;
+        end
+        // ALUWB
+        7'b0110011 : begin
+          result_src <= 2'b00;
+          reg_write <= 1;
+          counter <= counter + 2;
+        end
+        // Also ALUWB
+        7'b0010011 : begin
+          result_src <= 2'b00;
+          reg_write <= 1;
+          counter <= counter + 2;
+        end
+          
+      endcase
+    end
+    2: begin
+      case (instruction[6:0])
+        // ExecuteR
+        7'b0110011 : begin
+          alu_src_a <= 2'b10;
+          alu_src_b <= 2'b00;
+          counter <= counter + 1;
+        end
+        // ExecuteI
+        7'b0010011 : begin
+          alu_src_a <= 2'b10;
+          alu_src_b <= 2'b01;
+          counter <= counter + 1;
+        end
+        // MemAdr
+        default : begin
+          alu_src_a <= 2'b10;
+          alu_src_b <= 2'b01;
+          counter <= counter + 1;
+        end
+      endcase
+    end
+    // Decode
+    1: begin
+      mem_wr_ena <= 0;
+      imm_src <= 2'b00;
+      PC_ena <= 0;
+      ir_write <= 0;
+      counter <= counter + 1;
+    end
+    // Fetch
+    0 : begin
+      adr_src <= 0;
+      mem_wr_ena <= 0;
+      ir_write <= 1;
+      reg_write <= 0;
+      PC_ena <= 1;
+      alu_src_a <= 2'b00;
+      alu_src_b <= 2'b10;
+      result_src <= 2'b10;
+      alu_op <= 2'b00;
+      counter <= counter + 1;
+    end
+    default : begin
+      // if (counter % 2 == 1) begin
+      //   counter <= counter + 1;
+      // end else begin
+      //   counter <= 0;
+      // end
+      counter <= 0;
+    end
+  endcase
+  
+end
+
+// wire ir_write;
+logic ir_write;
 logic [31:0] instruction;
 register #(.N(32)) INSTRUCTION_REG(
   .clk(clk), .ena(ir_write), .rst(rst), .d(mem_rd_data), .q(instruction)
@@ -110,24 +242,24 @@ always_comb begin : register_file_inputs
 end
 
 // sign_extender_control_t sign_extender_control;
-logic sign_extender_control;
+logic [1:0] imm_src;
 logic [31:0] imm_ext;
 sign_extender SIGN_EXTENDER(
-  .imm(instruction[31:7]), .imm_src(sign_extender_control), .imm_ext(imm_ext)
+  .imm(instruction[31:7]), .imm_src(imm_src), .imm_ext(imm_ext)
 );
 
 logic [31:0] a;
 register #(.N(32)) A_REG(
-  .clk(clk), .ena(1), .rst(rst), .d(reg_data1), .q(a)
+  .clk(clk), .ena(1'b1), .rst(rst), .d(reg_data1), .q(a)
 );
 
 register #(.N(32)) B_REG(
-  .clk(clk), .ena(1), .rst(rst), .d(reg_data2), .q(mem_wr_data)
+  .clk(clk), .ena(1'b1), .rst(rst), .d(reg_data2), .q(mem_wr_data)
 );
 
 logic [31:0] alu_out;
 register #(.N(32)) ALU_RESULT_REG(
-  .clk(clk), .ena(1), .rst(rst), .d(alu_result), .q(alu_out)
+  .clk(clk), .ena(1'b1), .rst(rst), .d(alu_result), .q(alu_out)
 );
 
 logic adr_src;
@@ -149,7 +281,7 @@ always_comb begin : result_mux
   case(result_src)
     2'b00 : result = alu_out;
     2'b01 : result = data;
-    default result = alu_result;
+    2'b10 : result = alu_result;
   endcase
 end
 

@@ -6,15 +6,13 @@ module sign_extender(
     imm, imm_src, imm_ext
 );
 
-
-
 input wire [24:0] imm;
-input wire imm_src;
+input wire [1:0] imm_src;
 output logic [31:0] imm_ext;
 
 always_comb begin
   case(imm_src)
-    1 : begin
+    2'b00 : begin
       if (imm[24] == 1) begin
         imm_ext = {{20{1'b1}}, imm[24:13]};
       end 
