@@ -97,7 +97,6 @@ alu_behavioural ALU (
 
 // Implement your multicycle rv32i CPU here!
 
-logic [3:0] counter;
 logic [1:0] alu_op;
 always_comb begin : ALU_DECODER
 
@@ -112,7 +111,16 @@ always_comb begin : ALU_DECODER
             default : alu_control = ALU_ADD;
           endcase
         end
+        3'b001 : alu_control = ALU_SLL;
         3'b010 : alu_control = ALU_SLT;
+        3'b011 : alu_control = ALU_SLTU;
+        3'b100 : alu_control = ALU_XOR;
+        3'b101 : begin
+          case (instruction[31:25])
+          7'b0000000 : alu_control = ALU_SRL;
+          7'b0100000 : alu_control = ALU_SRA;
+          endcase
+        end
         3'b110 : alu_control = ALU_OR;
         3'b111 : alu_control = ALU_AND;
       endcase
@@ -121,109 +129,107 @@ always_comb begin : ALU_DECODER
   endcase
 end
 
+enum logic [3:0] {FETCH, DECODE, MEM_ADR, MEM_READ, MEM_WRITE, MEM_WB,
+            EXECUTE_R, EXECUTE_I, JAL, ALU_WB, BEQ, DECODE_WAIT,
+            MEM_ADR_WAIT, MEM_READ_WAIT, MEM_WB_WAIT} cycle;
+
 always_ff @(posedge clk) begin
-  // if (counter == 4'bxxxx) begin
-  //   counter <= 0;
-  // end
-  case (instruction[6:0])
-    7'b0000011 : alu_op <= 2'b00;
-    7'b0100011 : alu_op <= 2'b01;
-    7'b0110011 : alu_op <= 2'bxx;
-    7'b1100011 : alu_op <= 2'b10;
-    7'b0010011 : alu_op <= 2'b10;
-  endcase
-  case (counter)
-    4 : begin
-      case (instruction[6:0])
-        // MemWB
-        7'b0000011 : begin
-          result_src <= 2'b01;
-          reg_write <= 1;
-          counter <= counter + 1;
-        end
-      endcase
-    end
-    3: begin
-      case (instruction[6:0])
-        // MemRead
-        7'b0000011 : begin
-          adr_src <= 1;
-          result_src <= 2'b00;
-          counter <= counter + 1;
-        end
-        // MemWrite
-        7'b0100011 : begin
-          result_src <= 2'b00;
-          adr_src <= 1;
-          mem_wr_ena <= 1;
-          counter <= counter + 2;
-        end
-        // ALUWB
-        7'b0110011 : begin
-          result_src <= 2'b00;
-          reg_write <= 1;
-          counter <= counter + 2;
-        end
-        // Also ALUWB
-        7'b0010011 : begin
-          result_src <= 2'b00;
-          reg_write <= 1;
-          counter <= counter + 2;
-        end
-          
-      endcase
-    end
-    2: begin
-      case (instruction[6:0])
-        // ExecuteR
-        7'b0110011 : begin
-          alu_src_a <= 2'b10;
-          alu_src_b <= 2'b00;
-          counter <= counter + 1;
-        end
-        // ExecuteI
-        7'b0010011 : begin
-          alu_src_a <= 2'b10;
-          alu_src_b <= 2'b01;
-          counter <= counter + 1;
-        end
-        // MemAdr
-        default : begin
-          alu_src_a <= 2'b10;
-          alu_src_b <= 2'b01;
-          counter <= counter + 1;
-        end
-      endcase
-    end
-    // Decode
-    1: begin
-      mem_wr_ena <= 0;
-      imm_src <= 2'b00;
-      PC_ena <= 0;
-      ir_write <= 0;
-      counter <= counter + 1;
-    end
-    // Fetch
-    0 : begin
+
+  case (cycle)
+    FETCH : begin
+      PC_ena <= 1;
       adr_src <= 0;
       mem_wr_ena <= 0;
       ir_write <= 1;
       reg_write <= 0;
-      PC_ena <= 1;
       alu_src_a <= 2'b00;
       alu_src_b <= 2'b10;
-      result_src <= 2'b10;
       alu_op <= 2'b00;
-      counter <= counter + 1;
+      result_src <= 2'b10;
+      cycle <= DECODE;
     end
-    default : begin
-      // if (counter % 2 == 1) begin
-      //   counter <= counter + 1;
-      // end else begin
-      //   counter <= 0;
-      // end
-      counter <= 0;
+    DECODE : begin
+      mem_wr_ena <= 0;
+      // imm_src <= 2'b00;
+      PC_ena <= 0;
+      ir_write <= 0;
+      alu_op <= 2'b00;
+      cycle <= DECODE_WAIT;
     end
+    DECODE_WAIT : begin
+      // mem_wr_ena <= 0;
+      // imm_src <= 2'b00;
+      // PC_ena <= 0;
+      // ir_write <= 0;
+      // alu_op <= 2'b00;
+      case (instruction[6:0])
+        7'b0000011 : imm_src <= 2'b00;
+        7'b0100011 : imm_src <= 2'b01;
+        default : imm_src <= 2'b00;
+      endcase
+      case (instruction[6:0])
+        7'b0000011 : cycle <= MEM_ADR;
+        7'b0100011 : cycle <= MEM_ADR;
+        7'b0110011 : cycle <= EXECUTE_R;
+        7'b0010011 : cycle <= EXECUTE_I;
+        7'b1101111 : cycle <= JAL;
+        7'b1100011 : cycle <= BEQ;
+      endcase
+    end
+    MEM_ADR : begin
+      alu_src_a <= 2'b10;
+      alu_src_b <= 2'b01;
+      alu_op <= 2'b00;
+      cycle <= MEM_ADR_WAIT;
+    end
+    MEM_ADR_WAIT : begin
+      case (instruction[6:0])
+        7'b0000011 : cycle <= MEM_READ;
+        7'b0100011 : cycle <= MEM_WRITE;
+      endcase
+    end
+    EXECUTE_R : begin
+      alu_src_a <= 2'b10;
+      alu_src_b <= 2'b01;
+      alu_op <= 2'b10;
+      cycle <= ALU_WB;
+    end
+    EXECUTE_I : begin
+      alu_src_a <= 2'b10;
+      alu_src_b <= 2'b01;
+      alu_op <= 2'b10;
+      cycle <= ALU_WB;
+    end
+    MEM_READ : begin
+      adr_src <= 1;
+      result_src <= 2'b00;
+      cycle <= MEM_READ_WAIT;
+    end
+    MEM_READ_WAIT : begin
+      cycle <= MEM_WB;
+    end
+    MEM_WRITE : begin
+      result_src <= 2'b00;
+      adr_src <= 1;
+      mem_wr_ena <= 1;
+      cycle <= FETCH;
+    end
+    ALU_WB : begin
+      result_src <= 2'b00;
+      reg_write <= 1;
+      cycle <= FETCH;
+    end
+    MEM_WB : begin
+      result_src <= 2'b01;
+      reg_write <= 1;
+      cycle <= MEM_WB_WAIT;
+    end
+    MEM_WB_WAIT : begin
+      reg_write <= 0;
+      cycle <= FETCH;
+    end
+    
+    default : cycle <= FETCH;
   endcase
   
 end
@@ -314,5 +320,107 @@ end
 // end
 
 
-
+  // // if (counter == 4'bxxxx) begin
+  // //   counter <= 0;
+  // // end
+  // case (instruction[6:0])
+  //   7'b0000011 : alu_op <= 2'b00;
+  //   7'b0100011 : alu_op <= 2'b01;
+  //   7'b0110011 : alu_op <= 2'bxx;
+  //   7'b1100011 : alu_op <= 2'b10;
+  //   7'b0010011 : alu_op <= 2'b10;
+  // endcase
+  // case (counter)
+  //   4 : begin
+  //     case (instruction[6:0])
+  //       // MemWB
+  //       7'b0000011 : begin
+  //         result_src <= 2'b01;
+  //         reg_write <= 1;
+  //         counter <= counter + 1;
+  //       end
+  //     endcase
+  //   end
+  //   3: begin
+  //     case (instruction[6:0])
+  //       // MemRead
+  //       7'b0000011 : begin
+  //         adr_src <= 1;
+  //         result_src <= 2'b00;
+  //         counter <= counter + 1;
+  //       end
+  //       // MemWrite
+  //       7'b0100011 : begin
+  //         result_src <= 2'b00;
+  //         adr_src <= 1;
+  //         mem_wr_ena <= 1;
+  //         counter <= counter + 2;
+  //       end
+  //       // ALUWB
+  //       7'b0110011 : begin
+  //         result_src <= 2'b00;
+  //         reg_write <= 1;
+  //         counter <= counter + 2;
+  //       end
+  //       // Also ALUWB
+  //       7'b0010011 : begin
+  //         result_src <= 2'b00;
+  //         reg_write <= 1;
+  //         counter <= counter + 2;
+  //       end
+          
+  //     endcase
+  //   end
+  //   2: begin
+  //     case (instruction[6:0])
+  //       // ExecuteR
+  //       7'b0110011 : begin
+  //         alu_src_a <= 2'b10;
+  //         alu_src_b <= 2'b00;
+  //         counter <= counter + 1;
+  //       end
+  //       // ExecuteI
+  //       7'b0010011 : begin
+  //         alu_src_a <= 2'b10;
+  //         alu_src_b <= 2'b01;
+  //         counter <= counter + 1;
+  //       end
+  //       // MemAdr
+  //       default : begin
+  //         alu_src_a <= 2'b10;
+  //         alu_src_b <= 2'b01;
+  //         counter <= counter + 1;
+  //       end
+  //     endcase
+  //   end
+  //   // Decode
+  //   1: begin
+  //     mem_wr_ena <= 0;
+  //     imm_src <= 2'b00;
+  //     PC_ena <= 0;
+  //     ir_write <= 0;
+  //     counter <= counter + 1;
+  //   end
+  //   // Fetch
+  //   0 : begin
+  //     adr_src <= 0;
+  //     mem_wr_ena <= 0;
+  //     ir_write <= 1;
+  //     reg_write <= 0;
+  //     PC_ena <= 1;
+  //     alu_src_a <= 2'b00;
+  //     alu_src_b <= 2'b10;
+  //     result_src <= 2'b10;
+  //     alu_op <= 2'b00;
+  //     counter <= counter + 1;
+  //   end
+  //   default : begin
+  //     // if (counter % 2 == 1) begin
+  //     //   counter <= counter + 1;
+  //     // end else begin
+  //     //   counter <= 0;
+  //     // end
+  //     counter <= 0;
+  //   end
+  // endcase
 endmodule

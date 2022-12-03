@@ -20,6 +20,14 @@ always_comb begin
         imm_ext = {{20{1'b0}}, imm[24:13]};
       end
     end
+    2'b01 : begin
+      if (imm[24] == 1) begin
+        imm_ext = {{20{1'b1}}, imm[24:18], imm[4:0]};
+      end 
+      else begin
+        imm_ext = {{20{1'b0}}, imm[24:18], imm[4:0]};
+      end
+    end
     default : imm_ext = 32'b0;
   endcase
 end
