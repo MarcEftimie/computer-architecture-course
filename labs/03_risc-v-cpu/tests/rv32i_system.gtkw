@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Fri Dec  2 05:08:01 2022
+[*] Wed Dec  7 01:40:09 2022
 [*]
 [dumpfile] "/home/marc/olin-cafe-f22/labs/03_risc-v-cpu/rv32i_system.fst"
-[dumpfile_mtime] "Fri Dec  2 05:00:58 2022"
-[dumpfile_size] 10554
+[dumpfile_mtime] "Wed Dec  7 01:39:41 2022"
+[dumpfile_size] 14764
 [savefile] "/home/marc/olin-cafe-f22/labs/03_risc-v-cpu/tests/rv32i_system.gtkw"
-[timestart] 0
+[timestart] 347100
 [size] 1846 1016
 [pos] -1 -1
-*-15.080782 98500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-15.080782 389500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] test_rv32i_system.
 [treeopen] test_rv32i_system.UUT.
 [treeopen] test_rv32i_system.UUT.CORE.
@@ -25,19 +25,44 @@ test_rv32i_system.UUT.CORE.PC_ena
 @22
 test_rv32i_system.UUT.CORE.PC[31:0]
 test_rv32i_system.UUT.CORE.result[31:0]
+test_rv32i_system.UUT.CORE.PC_old[31:0]
+@28
+test_rv32i_system.UUT.CORE.ir_write
 @200
 -ALU
 @22
+test_rv32i_system.UUT.MMU.DATA_RAM.addr[7:0]
+test_rv32i_system.UUT.CORE.result[31:0]
+@28
+test_rv32i_system.UUT.CORE.adr_src
+@22
+test_rv32i_system.UUT.CORE.mem_addr[31:0]
+@28
+test_rv32i_system.UUT.CORE.mem_wr_ena
+@22
+test_rv32i_system.UUT.MMU.DATA_RAM.wr_data[31:0]
+test_rv32i_system.UUT.CORE.data[31:0]
+test_rv32i_system.UUT.CORE.mem_rd_data[31:0]
 test_rv32i_system.UUT.CORE.src_a[31:0]
 test_rv32i_system.UUT.CORE.src_b[31:0]
 test_rv32i_system.UUT.CORE.alu_result[31:0]
-@29
+@28
+test_rv32i_system.UUT.CORE.result_src[1:0]
+@23
+test_rv32i_system.UUT.CORE.result[31:0]
+@28
+test_rv32i_system.UUT.CORE.alu_src_a[1:0]
+@c00028
 test_rv32i_system.UUT.CORE.alu_src_b[1:0]
+@28
+(0)test_rv32i_system.UUT.CORE.alu_src_b[1:0]
+(1)test_rv32i_system.UUT.CORE.alu_src_b[1:0]
+@1401200
+-group_end
 @28
 test_rv32i_system.UUT.CORE.imm_src[1:0]
 @22
 test_rv32i_system.UUT.CORE.imm_ext[31:0]
-@28
 test_rv32i_system.UUT.CORE.instruction[31:0]
 @200
 -Register File
@@ -149,27 +174,5 @@ test_rv32i_system.UUT.CORE.src_b[31:0]
 test_rv32i_system.UUT.CORE.alu_control[3:0]
 @28
 test_rv32i_system.UUT.CORE.alu_op[1:0]
-@c00024
-test_rv32i_system.UUT.CORE.cycle[3:0]
-@28
-(0)test_rv32i_system.UUT.CORE.cycle[3:0]
-(1)test_rv32i_system.UUT.CORE.cycle[3:0]
-(2)test_rv32i_system.UUT.CORE.cycle[3:0]
-(3)test_rv32i_system.UUT.CORE.cycle[3:0]
-@1401200
--group_end
-@22
-test_rv32i_system.UUT.CORE.mem_rd_data[31:0]
-test_rv32i_system.UUT.CORE.alu_result[31:0]
-test_rv32i_system.UUT.CORE.result[31:0]
-@28
-test_rv32i_system.UUT.CORE.result_src[1:0]
-test_rv32i_system.UUT.CORE.adr_src
-@22
-test_rv32i_system.UUT.CORE.mem_rd_data[31:0]
-test_rv32i_system.UUT.CORE.mem_addr[31:0]
-@28
-test_rv32i_system.UUT.CORE.clk
-test_rv32i_system.UUT.CORE.mem_wr_ena
 [pattern_trace] 1
 [pattern_trace] 0
