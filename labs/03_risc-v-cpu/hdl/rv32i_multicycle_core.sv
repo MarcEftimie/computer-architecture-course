@@ -97,6 +97,11 @@ alu_behavioural ALU (
 
 // Implement your multicycle rv32i CPU here!
 
+always_comb begin
+  if (rst == 1) begin
+    cycle = FETCH;
+  end
+end
 logic [1:0] alu_op;
 always_comb begin : ALU_DECODER
 
@@ -149,44 +154,155 @@ enum logic [4:0] {FETCH, DECODE, MEM_ADR, MEM_READ, MEM_WRITE, MEM_WB,
             EXECUTE_R, EXECUTE_I, JAL, ALU_WB, BEQ, BNE, DECODE_WAIT,
             MEM_ADR_WAIT, MEM_READ_WAIT, ALU_WB_WAIT, MEM_WB_WAIT} cycle;
 
+// always_ff @(posedge clk) begin
+
+//   case (cycle)
+//     FETCH : begin
+//       invert_zero <= 0;
+//       branch <= 0;
+//       pc_write1 <= 1;
+//       adr_src <= 0;
+//       mem_wr_ena <= 0;
+//       ir_write <= 1;
+//       reg_write <= 0;
+//       alu_src_a <= 2'b00;
+//       alu_src_b <= 2'b10;
+//       alu_op <= 2'b00;
+//       result_src <= 2'b10;
+//       cycle <= DECODE;
+//     end
+//     DECODE : begin
+//       mem_wr_ena <= 0;
+//       // imm_src <= 2'b00;
+//       alu_src_a <= 2'b01;
+//       alu_src_b <= 2'b01;
+//       pc_write1 <= 0;
+//       ir_write <= 0;
+//       alu_op <= 2'b00;
+//       cycle <= DECODE_WAIT;
+//     end
+//     DECODE_WAIT : begin
+//       // mem_wr_ena <= 0;
+//       // imm_src <= 2'b00;
+//       // PC_ena <= 0;
+//       // ir_write <= 0;
+//       // alu_op <= 2'b00;
+//       case (instruction[6:0])
+//         7'b0000011 : imm_src <= 2'b00;
+//         7'b0100011 : imm_src <= 2'b01;
+//         default : imm_src <= 2'b00;
+//       endcase
+//       case (instruction[6:0])
+//         7'b0000011 : cycle <= MEM_ADR;
+//         7'b0100011 : cycle <= MEM_ADR;
+//         7'b0110011 : cycle <= EXECUTE_R;
+//         7'b0010011 : cycle <= EXECUTE_I;
+//         7'b1101111 : cycle <= JAL;
+//         7'b1100011 : begin
+//           case (instruction[14:12])
+//             3'b000 : cycle <= BEQ;
+//             3'b001 : cycle <= BNE;
+//           endcase
+//         end
+        
+//       endcase
+//     end
+//     MEM_ADR : begin
+//       alu_src_a <= 2'b10;
+//       alu_src_b <= 2'b01;
+//       alu_op <= 2'b00;
+//       cycle <= MEM_ADR_WAIT;
+//     end
+//     MEM_ADR_WAIT : begin
+//       case (instruction[6:0])
+//         7'b0000011 : cycle <= MEM_READ;
+//         7'b0100011 : cycle <= MEM_WRITE;
+//       endcase
+//     end
+//     EXECUTE_R : begin
+//       alu_src_a <= 2'b10;
+//       alu_src_b <= 2'b00;
+//       alu_op <= 2'b10;
+//       cycle <= ALU_WB;
+//     end
+//     EXECUTE_I : begin
+//       alu_src_a <= 2'b10;
+//       alu_src_b <= 2'b01;
+//       alu_op <= 2'b10;
+//       cycle <= ALU_WB;
+//     end
+//     JAL : begin
+//       alu_src_a <= 2'b01;
+//       alu_src_b <= 2'b10;
+//       alu_op <= 2'b00;
+//       result_src <= 2'b00;
+//       // PC_ena <= 1;
+//       jump <= 1;
+//       cycle <= ALU_WB;
+//     end
+//     BEQ : begin
+//       alu_src_a <= 2'b10;
+//       alu_src_b <= 2'b00;
+//       alu_op <= 2'b01;
+//       result_src <= 2'b00;
+//       branch <= 1;
+//       cycle <= FETCH;
+//     end
+//     BNE : begin
+//       alu_src_a <= 2'b10;
+//       alu_src_b <= 2'b00;
+//       alu_op <= 2'b01;
+//       result_src <= 2'b00;
+//       branch <= 1;
+//       invert_zero <= 1;
+//       cycle <= FETCH;
+//     end
+//     MEM_READ : begin
+//       adr_src <= 1;
+//       result_src <= 2'b00;
+//       cycle <= MEM_READ_WAIT;
+//     end
+//     MEM_READ_WAIT : begin
+//       cycle <= MEM_WB;
+//     end
+//     MEM_WRITE : begin
+//       result_src <= 2'b00;
+//       adr_src <= 1;
+//       mem_wr_ena <= 1;
+//       cycle <= FETCH;
+//     end
+//     ALU_WB : begin
+//       jump <= 0;
+//       result_src <= 2'b00;
+//       reg_write <= 1;
+//       cycle <= FETCH;
+//       // cycle <= ALU_WB_WAIT;
+//     end
+//     // ALU_WB_WAIT : begin
+//     //   cycle <= FETCH;
+//     // end
+//     MEM_WB : begin
+//       result_src <= 2'b01;
+//       reg_write <= 1;
+//       cycle <= MEM_WB_WAIT;
+//     end
+//     MEM_WB_WAIT : begin
+//       reg_write <= 0;
+//       cycle <= FETCH;
+//     end
+    
+//     default : cycle <= FETCH;
+//   endcase
+  
+// end
+
 always_ff @(posedge clk) begin
 
   case (cycle)
     FETCH : begin
-      invert_zero <= 0;
-      branch <= 0;
-      pc_write1 <= 1;
-      adr_src <= 0;
-      mem_wr_ena <= 0;
-      ir_write <= 1;
-      reg_write <= 0;
-      alu_src_a <= 2'b00;
-      alu_src_b <= 2'b10;
-      alu_op <= 2'b00;
-      result_src <= 2'b10;
       cycle <= DECODE;
     end
     DECODE : begin
-      mem_wr_ena <= 0;
-      // imm_src <= 2'b00;
-      alu_src_a <= 2'b01;
-      alu_src_b <= 2'b01;
-      pc_write1 <= 0;
-      ir_write <= 0;
-      alu_op <= 2'b00;
-      cycle <= DECODE_WAIT;
-    end
-    DECODE_WAIT : begin
-      // mem_wr_ena <= 0;
-      // imm_src <= 2'b00;
-      // PC_ena <= 0;
-      // ir_write <= 0;
-      // alu_op <= 2'b00;
-      case (instruction[6:0])
-        7'b0000011 : imm_src <= 2'b00;
-        7'b0100011 : imm_src <= 2'b01;
-        default : imm_src <= 2'b00;
-      endcase
       case (instruction[6:0])
         7'b0000011 : cycle <= MEM_ADR;
         7'b0100011 : cycle <= MEM_ADR;
@@ -199,96 +315,130 @@ always_ff @(posedge clk) begin
             3'b001 : cycle <= BNE;
           endcase
         end
-        
       endcase
     end
     MEM_ADR : begin
-      alu_src_a <= 2'b10;
-      alu_src_b <= 2'b01;
-      alu_op <= 2'b00;
-      cycle <= MEM_ADR_WAIT;
-    end
-    MEM_ADR_WAIT : begin
       case (instruction[6:0])
         7'b0000011 : cycle <= MEM_READ;
         7'b0100011 : cycle <= MEM_WRITE;
       endcase
     end
     EXECUTE_R : begin
-      alu_src_a <= 2'b10;
-      alu_src_b <= 2'b00;
-      alu_op <= 2'b10;
       cycle <= ALU_WB;
     end
     EXECUTE_I : begin
-      alu_src_a <= 2'b10;
-      alu_src_b <= 2'b01;
-      alu_op <= 2'b10;
       cycle <= ALU_WB;
     end
     JAL : begin
-      alu_src_a <= 2'b01;
-      alu_src_b <= 2'b10;
-      alu_op <= 2'b00;
-      result_src <= 2'b00;
-      // PC_ena <= 1;
-      jump <= 1;
       cycle <= ALU_WB;
     end
     BEQ : begin
-      alu_src_a <= 2'b10;
-      alu_src_b <= 2'b00;
-      alu_op <= 2'b01;
-      result_src <= 2'b00;
-      branch <= 1;
       cycle <= FETCH;
     end
     BNE : begin
-      alu_src_a <= 2'b10;
-      alu_src_b <= 2'b00;
-      alu_op <= 2'b01;
-      result_src <= 2'b00;
-      branch <= 1;
-      invert_zero <= 1;
       cycle <= FETCH;
     end
     MEM_READ : begin
-      adr_src <= 1;
-      result_src <= 2'b00;
-      cycle <= MEM_READ_WAIT;
-    end
-    MEM_READ_WAIT : begin
       cycle <= MEM_WB;
     end
     MEM_WRITE : begin
-      result_src <= 2'b00;
-      adr_src <= 1;
-      mem_wr_ena <= 1;
       cycle <= FETCH;
     end
     ALU_WB : begin
-      jump <= 0;
-      result_src <= 2'b00;
-      reg_write <= 1;
       cycle <= FETCH;
-      // cycle <= ALU_WB_WAIT;
     end
-    // ALU_WB_WAIT : begin
-    //   cycle <= FETCH;
-    // end
     MEM_WB : begin
-      result_src <= 2'b01;
-      reg_write <= 1;
-      cycle <= MEM_WB_WAIT;
-    end
-    MEM_WB_WAIT : begin
-      reg_write <= 0;
       cycle <= FETCH;
     end
-    
-    default : cycle <= FETCH;
   endcase
   
+end
+
+always_comb begin : CPU_CONTROL
+  case (cycle)
+    FETCH : begin
+      invert_zero = 0;
+      branch = 0;
+      pc_write1 = 1;
+      adr_src = 0;
+      mem_wr_ena = 0;
+      ir_write = 1;
+      reg_write = 0;
+      alu_src_a = 2'b00;
+      alu_src_b = 2'b10;
+      alu_op = 2'b00;
+      result_src = 2'b10;
+    end
+    DECODE : begin
+      case (instruction[6:0])
+        7'b0000011 : imm_src = 2'b00;
+        7'b0100011 : imm_src = 2'b01;
+        default : imm_src = 2'b00;
+      endcase
+      mem_wr_ena = 0;
+      alu_src_a = 2'b01;
+      alu_src_b = 2'b01;
+      pc_write1 = 0;
+      ir_write = 0;
+      alu_op = 2'b00;
+    end
+    MEM_ADR : begin
+      alu_src_a = 2'b10;
+      alu_src_b = 2'b01;
+      alu_op = 2'b00;
+    end
+    EXECUTE_R : begin
+      alu_src_a = 2'b10;
+      alu_src_b = 2'b00;
+      alu_op = 2'b10;
+    end
+    EXECUTE_I : begin
+      alu_src_a = 2'b10;
+      alu_src_b = 2'b01;
+      alu_op = 2'b10;
+    end
+    JAL : begin
+      alu_src_a = 2'b01;
+      alu_src_b = 2'b10;
+      alu_op = 2'b00;
+      result_src = 2'b00;
+      jump = 1;
+    end
+    BEQ : begin
+      alu_src_a = 2'b10;
+      alu_src_b = 2'b00;
+      alu_op = 2'b01;
+      result_src = 2'b00;
+      branch = 1;
+    end
+    BNE : begin
+      alu_src_a = 2'b10;
+      alu_src_b = 2'b00;
+      alu_op = 2'b01;
+      result_src = 2'b00;
+      branch = 1;
+      invert_zero = 1;
+    end
+    MEM_READ : begin
+      adr_src = 1;
+      result_src = 2'b00;
+    end
+    MEM_WRITE : begin
+      result_src = 2'b00;
+      adr_src = 1;
+      mem_wr_ena = 1;
+    end
+    ALU_WB : begin
+      jump = 0;
+      result_src = 2'b00;
+      reg_write = 1;
+    end
+    MEM_WB : begin
+      result_src = 2'b01;
+      reg_write = 1;
+      reg_write = 0;
+    end
+  endcase
 end
 
 // wire ir_write;

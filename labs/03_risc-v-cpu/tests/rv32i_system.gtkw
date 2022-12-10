@@ -1,12 +1,12 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Wed Dec  7 01:40:09 2022
+[*] Wed Dec  7 23:43:36 2022
 [*]
 [dumpfile] "/home/marc/olin-cafe-f22/labs/03_risc-v-cpu/rv32i_system.fst"
-[dumpfile_mtime] "Wed Dec  7 01:39:41 2022"
-[dumpfile_size] 14764
+[dumpfile_mtime] "Wed Dec  7 23:41:18 2022"
+[dumpfile_size] 8395
 [savefile] "/home/marc/olin-cafe-f22/labs/03_risc-v-cpu/tests/rv32i_system.gtkw"
-[timestart] 347100
+[timestart] 0
 [size] 1846 1016
 [pos] -1 -1
 *-15.080782 389500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
